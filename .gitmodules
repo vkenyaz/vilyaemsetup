@@ -1,0 +1,15 @@
+[submodule "suckless/vildmenu"]
+	path = suckless/vildmenu
+	url = https://codeberg.org/knyz/vildmenu
+[submodule "suckless/vildwm"]
+	path = suckless/vildwm
+	url = https://codeberg.org/knyz/vildwm
+[submodule "suckless/vilst"]
+	path = suckless/vilst
+	url = https://codeberg.org/knyz/vilst
+[submodule "suckless/vilnhkd"]
+	path = suckless/vilnhkd
+	url = https://codeberg.org/knyz/vilnhkd
+[submodule "suckless/vilsxiv"]
+	path = suckless/vilsxiv
+	url = https://codeberg.org/knyz/vilsxiv
