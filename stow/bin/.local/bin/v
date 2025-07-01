@@ -1,0 +1,39 @@
+#!/bin/sh
+#v, automatic file-opener, pager-handler, and alias
+
+# Turn into a pager like less: ls | v
+if [ ! tty >/dev/null ]; then
+    while read line; do
+        echo "$line"
+    done 
+fi
+
+# Use vim if no argument is provided
+if [ $# -eq 0 ]; then
+    nvim
+    exit 0
+fi
+
+case $* in
+*mp4*|*mkv*|*webm*|*flv*|*m4a*|*opus*|*mp3)
+mpv $*
+;;
+*jpg*|*jpeg*|*png*|*gif|*webp)
+sxiv $*
+;;
+*djvu*|*pdf*|*epub*)
+zathura $*
+;;
+*docx*|*odt*|*rtf*|*xls*|*xlsx*|*ppt*|*pptx*)
+libreoffice $*
+;;
+*zim*)
+kiwix-dekstop $*
+;;
+*txt*|*md*|*csv*|*html*|*js*|*json*|*conf*|*.c|*.h|*.mk|*.info|*.orig|*.local|*[a-z]*|*[A-Z]*|/etc*|*config*|*rc)
+nvim $*
+;;
+*)
+nvim $*
+;;
+esac

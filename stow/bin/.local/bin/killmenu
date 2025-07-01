@@ -1,0 +1,8 @@
+#!/usr/bin/bash
+#############################################
+# Description - Kill a process using dmenu, processes are sorted
+# by CPU usage, easily kill process hogs. No need to open top and fiddle around.
+# Author - Vilyaem
+# ###########################################
+pid=$(ps -eo pid,comm,pcpu | sort -r -n -k 3 | grep -v CPU | dmenu -l 30 -sb cyan -nb blue -nf white -sf black | awk '{print $1}')  || exit 0
+kill 

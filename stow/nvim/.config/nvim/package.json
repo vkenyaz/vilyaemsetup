@@ -1,0 +1,13 @@
+{
+	"name": "vilyaem-snippets",
+	"contributes": {
+		"snippets": [
+			{
+				"language": [
+					"c"
+				],
+				"path": "./snippets/c.json"
+			}
+		]
+	}
+}

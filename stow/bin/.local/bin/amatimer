@@ -1,0 +1,27 @@
+#!/usr/bin/bash
+#############################################
+# Description - Helpful General-Purpose timer
+# using Zenity and qalc to parse complex time expressions
+# Author - Vilyaem
+# ###########################################
+
+ZENTIME=$(zenity --title="Amatimer" --entry --text="Enter desired length of time for the timer:")
+SECONDS=$(qalc -t "$ZENTIME to seconds" | awk '{print $1}')
+
+
+(
+for ((i=1; i<=SECONDS; ++i)); do
+  #echo "Sec:$SECONDS Elapsed:$i"
+  PROG=$(echo "($i / $SECONDS) * 100" | bc)
+  echo "$i"
+  echo "# $((SECONDS - i)) seconds left"
+  SECONDS=$(( SECONDS = SECONDS - 1 )) # For some reason it's incrementing, decrement
+  sleep 1
+done
+
+) | zenity --title "Amatimer" --progress --text="Timer is active..." --auto-close --percentage=0
+
+# Emit a flat sample to aplay using perl
+perl -e 'for($i=0;$i<44100;$i++){print pack("C",($i*440/44100)%2*255)}' | aplay -f U8 -r 44100 &
+
+zenity --title "Amatimer complete!" --info --text="Time is up!"

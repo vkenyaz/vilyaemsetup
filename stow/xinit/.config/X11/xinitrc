@@ -1,0 +1,12 @@
+export PATH="$HOME/.local/bin:$PATH"
+xset r rate 300 100 &
+picom &
+setxkbmap -option caps:escape us dvorak &
+xbanish &
+nhkd &
+$HOME/.local/bin/bar &
+redshift -p &
+xrdb -merge ~/.Xresources &
+[ -f ~/.cache/wal/colors.sh ] && . ~/.cache/wal/colors.sh
+wal -R &
+exec $1

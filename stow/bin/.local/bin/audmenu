@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+#############################################
+# Description - Tell Audacious, my dedicated music player, to play a song
+# Author - Vilyaem
+# ###########################################
+song=$(find -O3 "$HOME/m/music/" -name "*.opus" -o -name "*.mp3" -o -name "*.m4a" -o -name "*.ogg" | dmenu -p "Pick a song for Audacious:" -l 30 -nb "#0b0b0b") || exit 0
+audacious -p "$song"

@@ -1,0 +1,78 @@
+#!/usr/bin/bash
+#############################################
+# Description - Virtual machine management and execution with dmenu
+# Author - Vilyaem
+# ###########################################
+
+set -x
+
+# Where you store your virtual machines
+VMPATH="$HOME/x/vm/"
+
+# Where you store your ISO/boot image files
+ISOPATH="$HOME/a/iso/"
+
+#Default dmenu setup, make things less messy
+DEFMENU="dmenu -i -l 30 -nb #0B0B0B -sb #FFFFFF -sf #0B0B0B -nf #DDDDDD"
+
+# Get Architectures
+archs=$(\ls /usr/bin/qemu-system-*)
+
+# First ask if they want to do (launch vm, custom launch, make vm), use default x86 profile
+opt=$(printf "Launch VM\nCustom Launch\nMake VM" | $DEFMENU ) || exit 0
+
+case $opt in
+
+  "Launch VM")
+    disk=$(find "$VMPATH" -name "*.qcow2" -o -name "*.img" | $DEFMENU -p "Select disk image:") || exit 0
+    qemu-system-x86_64 --enable-kvm -smp "$(nproc)" -m 2G -hda "$disk"
+    exit
+    ;;
+
+  "Launch Profile")
+    prof=$(find "$VMPATH" -name "*.profile" | $DEFMENU -p "Select Profile:") || exit 0
+    ./"$prof"
+    exit
+    ;;
+
+  "Custom Launch")
+    
+    # First ask if we want to make a profile
+
+    arch=$(echo "$archs" | $DEFMENU -p "Select Architecture:") || exit 0
+    machine=$($arch -machine help | grep -v Supported | $DEFMENU -p "Select Machine type:" | awk '{print $1}') || exit 0
+    cores=$(printf "%s\n1\n2\n3\n4\n5\n6\n7\n8" "$(nproc)" | $DEFMENU -p "Select core coun:t" ) || exit 0
+    disk=$(printf "None\n%s" "$(find "$VMPATH" -name "*.qcow2" -o -name "*.img")" | $DEFMENU -p "Select disk image") || exit 0
+
+    if [ "$disk" != "None" ] ; then
+      disk="-hda $disk"
+    else
+      disk=""
+    fi
+
+    memory=$(printf "512\n1024\n2048\n4096\n8192\n16384" | $DEFMENU -p "Memory (in megabytes):") || exit 0
+    
+    iso=$(printf "None\n%s" "$(\find "$ISOPATH" -name "*.iso")" | $DEFMENU -p "Select ISO:") || exit 0
+
+    if [ "$iso" != "None" ] ; then
+      iso="-cdrom $iso"
+    else
+      iso=""
+    fi
+
+    args=( --enable-kvm --machine type="$machine",accel=kvm -m "$memory" -smp "$cores" $disk)
+    \ls "$disk"
+    "$arch" "${args[@]}"
+
+    ;;
+
+  "Make VM disk")
+    name=$($DEFMENU -p "Enter name of new VM:" <&- ) || exit 0
+    format=$(printf "raw\nqcow2\n" | $DEFMENU -p "What format?:") || exit 0
+    sz=$($DEFMENU -p "What size? (megabytes):" <&-) || exit 0
+
+    qemu-img create -f "$format" $VMPATH/"$name" "$sz"m
+
+
+    ;;
+esac

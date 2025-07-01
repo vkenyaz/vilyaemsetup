@@ -1,0 +1,5 @@
+#!/bin/sh
+face=$(cat "$HOME/.local/share/soymojis" | dmenu -l 30 -nb cyan -sb black -nf black -sf white | awk '{print $1}') || exit 0
+xdotool type "$face"
+echo "$face" | xclip
+notify-send "Pasted and copied emoji"

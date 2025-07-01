@@ -1,0 +1,27 @@
+#!/bin/sh
+#############################################
+# Description - Select books for reading
+# Open in Zathura if it is a document, Kiwix if it's
+# a compressed zim, a browser if it's HTML, 
+# and a text editor if it is anything else.
+# Author - Vilyaem
+# ###########################################
+book=$(ls $HOME/b/ | dmenu -l 30)
+
+book="$HOME/b/$book"
+
+if [ -z "$book" ]; then
+    echo "No file selected."
+    exit 1
+fi
+
+case "${book##*.}" in
+    zim)
+r       kiwix-desktop "$book" ;;
+    epub|pdf|djvu)
+        zathura "$book" ;;
+    html|xhtml)
+        st -e links2 "$book" ;;
+    *)
+        st -e nvim "$book" ;;
+esac

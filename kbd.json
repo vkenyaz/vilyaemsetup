@@ -1,0 +1,194 @@
+[
+  [
+    {
+      "a": 6
+    },
+    "Esc",
+    "F1",
+    "F2",
+    "F3",
+    "F4",
+    "F5",
+    "F6",
+    "F7",
+    "F8",
+    "F9",
+    "F10",
+    "F11",
+    "F12",
+    {
+      "a": 5
+    },
+    "PrtSc\nNmLk",
+    "Pause\nScrLk",
+    "Delete\nInsert"
+  ],
+  [
+    {
+      "a": 4
+    },
+    "~\n`\n`\n~",
+    "!\n1\n1\n!",
+    "@\n2\n2\n@",
+    "#\n3\n3\n#",
+    "$\n4\n4\n$",
+    "%\n5\n5\n%",
+    "^\n6\n6\n^",
+    "&\n7\n7\n&",
+    "*\n8\n8\n*",
+    "(\n9\n9\n(",
+    "\n0\n0\n0",
+    "_\n-\n[\n{",
+    "+\n=\n]\n}",
+    {
+      "a": 6,
+      "w": 2
+    },
+    "Backspace",
+    "Home"
+  ],
+  [
+    {
+      "a": 4,
+      "w": 1.5
+    },
+    "Tab",
+    {
+      "c": "#0099fa",
+      "f": 2
+    },
+    "Q\nq\n'\n\"\n\n\nBookmk",
+    {
+      "f": 3
+    },
+    "W\nw\n,\n<\n\n\nBible",
+    "E\ne\n.\n>\n\n\nWallp",
+    "R\nr\np\nP\n\n\nBrowse",
+    "T\nt\ny\nY\n\n\nMedia",
+    {
+      "c": "#cccccc"
+    },
+    "Y\ny\nf\nF",
+    "U\nu\ng\nG",
+    "I\ni\nc\nC",
+    "O\no\nr\nR",
+    "P\np\nl\nL",
+    "{\n[\n/\n?",
+    "}\n]\n=\n+",
+    {
+      "w": 1.5
+    },
+    "|\n\\\n\\\n|",
+    {
+      "a": 6
+    },
+    "Page Up"
+  ],
+  [
+    {
+      "a": 4,
+      "w": 1.75
+    },
+    "Caps Lock",
+    {
+      "c": "#0099fa"
+    },
+    "A\na\na\nA\n\n\nTmux",
+    "S\ns\no\nO\n\n\nEmail",
+    "D\nd\ne\nE\n\n\nScrShot",
+    "F\nf\nu\nU\n\n\nEmoji",
+    {
+      "f": 1
+    },
+    "G\ng\ni\nI\n\n\nBigScrShot",
+    {
+      "c": "#cccccc",
+      "f": 3
+    },
+    "H\nh\nd\nD",
+    {
+      "c": "#0099fa"
+    },
+    "J\nj\nh\nH\n\n\nTelegm",
+    {
+      "c": "#cccccc"
+    },
+    "K\nk\nt\nT",
+    "L\nl\nn\nN",
+    ":\n;\ns\nS",
+    "\"\n'\n-\n_",
+    {
+      "a": 6,
+      "w": 2.25
+    },
+    "Enter",
+    "Page Down"
+  ],
+  [
+    {
+      "w": 2.25
+    },
+    "Shift",
+    {
+      "c": "#0099fa",
+      "a": 4
+    },
+    "Z\nz\n;\n:\n\n\nQalc!",
+    "X\nx\nq\nQ\n\n\nPasswd",
+    "C\nc\nj\nJ\n\n\nJukebx",
+    "V\nv\nk\nK\n\n\nKill",
+    "B\nb\nx\nX\n\n\nFm",
+    "N\nn\nb\nB\n\n\nObs.",
+    {
+      "c": "#cccccc"
+    },
+    "M\nm\nm\nM",
+    "<\n,\nw\nW",
+    ">\n.\nv\nV",
+    "?\n/\nz\nZ",
+    {
+      "a": 6,
+      "w": 1.75
+    },
+    "Shift",
+    {
+      "a": 7
+    },
+    "↑",
+    {
+      "a": 6
+    },
+    "End"
+  ],
+  [
+    {
+      "w": 1.25
+    },
+    "Ctrl",
+    {
+      "w": 1.25
+    },
+    "Win",
+    {
+      "w": 1.25
+    },
+    "Alt",
+    {
+      "a": 7,
+      "w": 6.25
+    },
+    "",
+    {
+      "a": 6
+    },
+    "Alt",
+    "Fn",
+    "Ctrl",
+    {
+      "a": 7
+    },
+    "←",
+    "↓",
+    "→"
+  ]
+]

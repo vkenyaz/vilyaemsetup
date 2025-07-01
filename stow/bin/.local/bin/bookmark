@@ -1,0 +1,10 @@
+#!/bin/sh
+#############################################
+# Description - Book marks with dmenu
+# Author - Vilyaem
+# ###########################################
+bookmark=$(cat "$1" | dmenu -l 30 | awk '{print $1}')
+# Copy the selected line to the clipboard using xclip
+xdotool type "$bookmark"
+# Display a notification with the copied line
+notify-send "Typed out bookmark" "$bookmark"

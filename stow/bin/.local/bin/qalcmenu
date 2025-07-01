@@ -1,0 +1,8 @@
+#!/usr/bin/bash
+#############################################
+# Description - Calculate anything using qalc in dmenu!
+# Author - Vilyaem
+# ###########################################
+hist="$HOME/.config/qalculate/qalc.history"
+prompt=$( cat "$hist" | dmenu -l 5 -sb "#bf42bf" -p "Qalculate:")
+notify-send "Qalculation"       "$(qalc "$prompt")"

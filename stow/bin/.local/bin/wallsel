@@ -1,0 +1,8 @@
+#!/usr/bin/bash
+#############################################
+# Description - Select a wallpaper, includes Devuan system wallpapers
+# Author - Vilyaem
+# ###########################################
+WALL=$(\ls /usr/share/images/desktop-base/*.png $HOME/w/*.png $HOME/w/*.jpg $HOME/w/*.jpeg $HOME/w/*.PNG | dmenu -l 30 -p "Select a Wallpaper:" ) || exit 0
+xwallpaper --stretch "$WALL"
+wal -a 30 "$WALL"

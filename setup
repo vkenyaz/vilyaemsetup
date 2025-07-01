@@ -1,0 +1,57 @@
+#!/bin/sh
+clear
+set -x
+cd ~/ || exit 1
+
+# Make some directories
+mkdir a b d j m r s w x z
+
+# Remove default DE directories
+rmdir -i Desktop Downloads Videos Documents Pictures Public Templates 
+
+# Clone setup repository
+git clone --depth=1 --recurse-submodules https://codeberg.org/knyz/vilyaemsetup.git || exit 1
+mv vilyaemsetup .vilyaemsetup || exit 1
+cd .vilyaemsetup || exit 1
+
+cp wallpapers/* "$HOME/w/"
+
+# Install packages
+apt install -y "$(cat "pkgs.txt")" || exit 1
+
+# Install stowed configs, scripts and binaries
+cd stow || exit 1
+
+for f in *; do 
+stow -t -v ~ "$f"
+done
+
+# Compile and install custom software
+cd ../suckless/ || exit 1
+
+for f in *; do
+cd "$f"/ || exit 1
+sudo make clean install || exit 1
+cd ../ || exit 1
+done
+
+cd ../ || exit 1
+
+
+# Install Librewolf as default browser
+sudo apt update && sudo apt install extrepo -y
+sudo extrepo enable librewolf
+sudo apt update && sudo apt install librewolf -y
+
+# Initialize browser profile & install extensions into Librewolf
+librewolf -CreateProfile "default"
+cp browser/* "$HOME/".librewolf/*.default-default/extensions/
+ln -s ~/.mozilla/native-messaging-hosts ~/.librewolf/native-messaging-hosts
+
+# Turn off lightdm, turn on slim
+sudo rc-update del lightdm
+sudo rc-update add slim
+
+cd ~ || exit 1
+
+printf "Vilyaem's Setup has been installed\n"
