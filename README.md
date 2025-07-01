@@ -20,6 +20,10 @@ My system never breaks, it's easy to pick up and maintain, and runs fast.
 1. [Install Devuan](https://www.devuan.org/get-devuan) using the TUI installer
 2. Ensure you can use doas/sudo with your user
 3. Run this command to install my setup
+
+```bash
+bash <( curl -fsSL https://codeberg.org/knyz/vilyaemsetup/raw/branch/master/setup)
+```
 4. Reboot, you should be able to login 
 
 

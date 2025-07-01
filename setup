@@ -7,7 +7,7 @@ cd ~/ || exit 1
 mkdir a b d j m r s w x z
 
 # Remove default DE directories
-rmdir -i Desktop Downloads Videos Documents Pictures Public Templates 
+rmdir Desktop Downloads Videos Documents Pictures Public Templates 
 
 # Clone setup repository
 git clone --depth=1 --recurse-submodules https://codeberg.org/knyz/vilyaemsetup.git || exit 1
@@ -17,7 +17,8 @@ cd .vilyaemsetup || exit 1
 cp wallpapers/* "$HOME/w/"
 
 # Install packages
-apt install -y "$(cat "pkgs.txt")" || exit 1
+sudo apt update
+sudo apt install -y $(cat "pkgs.txt") || exit 1
 
 # Install stowed configs, scripts and binaries
 cd stow || exit 1

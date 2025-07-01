@@ -87,10 +87,6 @@ cdparanoia
 cdrdao
 chafa
 cheese
-chromium
-chromium-common
-chromium-sandbox
-cinnamon-core
 cjs
 clang
 clang-14
@@ -597,7 +593,6 @@ libreoffice-calc
 libreoffice-gnome
 libreoffice-impress
 libreoffice-writer
-librewolf
 libseccomp2
 libselinux1
 libsemanage-common
@@ -720,7 +715,6 @@ oathtool
 obfs4proxy
 obs-plugins
 obs-studio
-obsidian
 occt-misc
 ocrad
 ocrmypdf
