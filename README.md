@@ -1,6 +1,8 @@
 # Vilyaem's Setup
 
 
+![Desktop Screenshot](desktop.png)
+
 This repository contains my [Devuan](https://en.wikipedia.org/wiki/Devuan)
 [OpenRC](https://en.wikipedia.org/wiki/OpenRC) setup, including personal
 scripts/programs, configuration and forks of various programs I use, there is a
