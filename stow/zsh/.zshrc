@@ -38,25 +38,13 @@ bindkey '^[[A' history-search-backward
 bindkey '^[[B' history-search-forward
 
 
-
-##########Keybindings##########
-# function tmux(){
-#   zle -I
-#   BUFFER="pgrep tmux && tmux -a
-#   pgrep tmux || tmuxinator start work"
-#   zle accept-line 
-# }
-# zle -N tmux
-# # Attach/start Tmux with Ctrl-A
-# bindkey '^A' tmux
-
-
 ##########Default Programs##########
 export BROWSER="librewolf"
 export BUG_PROJECT=$(pwd)/bug
 export CC="gcc"
 export EDITOR="v"
-export MANPAGER='nvim +Man!'
+#export MANPAGER='nvim +Man!'
+export MANPAGER='sh -c "col -b | nvim -R -"'
 export TERMINAL="st"
 export SESSION_MANAGER="slim"
 
@@ -172,6 +160,11 @@ tw(){
   mpv $(echo "$@" | sed -e 's|inv\.nadeko\.net|youtube.com|g' -e 's|yewtu\.be|youtube.com|g')
 }
 
+#Download 'tube with metadata
+tm(){
+noglob yt-dlp -x --audio-format mp3 --embed-metadata --embed-thumbnail --add-metadata $(echo "$@" | sed -e 's|inv\.nadeko\.net|youtube.com|g' -e 's|yewtu\.be|youtube.com|g')
+}
+
 #Yazi shell wrapper script
 function y(){
   local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
@@ -180,28 +173,6 @@ function y(){
     builtin cd -- "$cwd"
   fi
   rm -f -- "$tmp"
-}
-
-#Convert media with ffmpeg using GNU parallel
-mconv(){
-    if [ $# -lt 2 ]; then
-        echo "Usage: mconv '<pattern>' '<ffmpeg switches>' [suffix or extension]"
-        echo "Example: mconv '*.mkv' '-vn -acodec libmp3lame' .mp3"
-        echo "Example: mconv '*.mp4' '-vf scale=640:360' -small.mp4"
-        return 1
-    fi
-
-    local pattern="$1"
-    local switches="$2"
-    local suffix="${3:-}"
-
-    find . -type f -name "$pattern" | parallel --bar '
-        infile="{}"
-        base="${infile%.*}"
-        ext="${infile##*.}"
-        outfile="${base}'"$suffix"'"
-        ffmpeg -y -i "$infile" '"$switches"' "$outfile"
-    '
 }
 
 ##########Zoxide##########
