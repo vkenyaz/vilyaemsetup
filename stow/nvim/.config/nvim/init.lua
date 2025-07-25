@@ -237,6 +237,7 @@ map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "general copy whole file" })
 map("n", "<leader>t", function()
   local time = os.date("## %Y %m %d %H:%M:%S")
   vim.api.nvim_put({ time }, "l", true, true)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("kdd", true, false, true), "n", true)
 end, { desc = "Insert time as Markdown section" })
 
 -- Open oil on directory or empty file with nothing in stdin

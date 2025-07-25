@@ -37,6 +37,7 @@ bash <( curl -fsSL https://codeberg.org/knyz/vilyaemsetup/raw/branch/master/setu
     * Center layout
     * Center master layout
     * Fibonacci layout
+    * Window swallowing
 * Vilyaem's fork of [st](https://st.suckless.org/) - terminal emulator
     * Sixel image support (for file previews)
     * Scroll back
@@ -129,7 +130,16 @@ layout.
 |Super+b                                                      |Open file manager in separate window.                        |Disk (b)lock. (B)lock devices.                               |
 |Super+n                                                      |Open GUI note related software such as QOwnNotes or Obsidian.|(N)ote.                                                      |
 
+## INFO
+Website: https://vilyaem.xyz
 
+Support this project:
+
+XMR:48Sxa8J6518gqp4WeGtQ4rLe6SctPrEnnCqm6v6ydjLwRPi9Uh9gvVuUsU2AEDw75meTHCNY8KfU6Txysom4Bn5qPKMJ75w
+        
+WOW:WW2L2yC6DMg7GArAH3nqXPA6UBoRogf64GodceqA32SeZQpx27xd6rqN82e36KE48a8SAMSoXDB5WawAgVEFKfkw1Q5KSGfX9
+    
+Liberapay: https://liberapay.com/vilyaem/donate
 
 ## "LICENSE"
 
