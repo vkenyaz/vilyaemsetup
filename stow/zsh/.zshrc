@@ -147,7 +147,7 @@ bye(){
 
 #Make a journal entry
 j(){
-  vim $HOME/j/Journal/$(date -I).md
+  vim $HOME/j/Journal/$(date -I).md $HOME/j/Todo.md
 }
 
 #Download 'Tube links with yt-dlp

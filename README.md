@@ -130,6 +130,27 @@ layout.
 |Super+b                                                      |Open file manager in separate window.                        |Disk (b)lock. (B)lock devices.                               |
 |Super+n                                                      |Open GUI note related software such as QOwnNotes or Obsidian.|(N)ote.                                                      |
 
+## Neovim and CLI-only setup
+
+There are two extra installation scripts available.
+
+
+* "cli" - Installs only the command-line environment, helpful for:
+    - Setting up a SSH environment
+    - Improving the experience of Termux
+    - Allowing you to use your typical desktop environment, but with a
+
+```bash
+bash <( curl -fsSL https://codeberg.org/knyz/vilyaemsetup/raw/branch/master/cli)
+```
+
+* "nvim" - Installs only my Neovim (and Vim) configuration
+
+```bash
+bash <( curl -fsSL https://codeberg.org/knyz/vilyaemsetup/raw/branch/master/nvim)
+```
+
+
 ## INFO
 Website: https://vilyaem.xyz
 

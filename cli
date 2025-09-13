@@ -1,0 +1,31 @@
+#!/bin/sh
+clear
+set -x
+cd ~/ || exit 1
+
+# Clone setup repository
+git clone --depth=1 --recurse-submodules https://codeberg.org/knyz/vilyaemsetup.git || exit 1
+mv vilyaemsetup .vilyaemsetup || exit 1
+cd .vilyaemsetup || exit 1
+
+
+# Install packages
+sudo apt update
+#sudo apt install -y $(cat "pkgs.txt") || exit 1
+sudo apt install zsh neovim htop tmux
+
+# Install stowed configs, scripts and binaries
+cd stow || exit 1
+
+stow -t -v ~ "bin"
+stow -t -v ~ "htop"
+stow -t -v ~ "neovim"
+stow -t -v ~ "readline"
+stow -t -v ~ "tmux"
+stow -t -v ~ "vim"
+stow -t -v ~ "yazi"
+stow -t -v ~ "zsh"
+
+cd ~ || exit 1
+
+printf "Vilyaem's cli-only setup has been installed\n"
