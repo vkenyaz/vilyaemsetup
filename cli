@@ -3,6 +3,10 @@ clear
 set -x
 cd ~/ || exit 1
 
+# Install necessary packages for setup to work at all
+sudo apt update
+sudo apt -y install git stow
+
 # Clone setup repository
 git clone --depth=1 --recurse-submodules https://codeberg.org/knyz/vilyaemsetup.git || exit 1
 mv vilyaemsetup .vilyaemsetup || exit 1
@@ -10,7 +14,6 @@ cd .vilyaemsetup || exit 1
 
 
 # Install packages
-sudo apt update
 #sudo apt install -y $(cat "pkgs.txt") || exit 1
 sudo apt install zsh neovim htop tmux
 

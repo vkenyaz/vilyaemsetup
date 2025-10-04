@@ -3,6 +3,11 @@ clear
 set -x
 cd ~/ || exit 1
 
+
+# Install necessary packages for setup to work at all
+sudo apt update
+sudo apt -y install git stow
+
 # Make some directories
 mkdir a b d j m r s w x z
 
@@ -17,7 +22,6 @@ cd .vilyaemsetup || exit 1
 cp wallpapers/* "$HOME/w/"
 
 # Install packages
-sudo apt update
 sudo apt install -y $(cat "pkgs.txt") || exit 1
 
 # Install stowed configs, scripts and binaries
