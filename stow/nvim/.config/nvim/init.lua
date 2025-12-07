@@ -5,7 +5,6 @@
 
 vim.g.mapleader = " "
 
-
 --Vilyaem's Settings
 vim.opt.autoindent = true
 vim.opt.backspace = { 'indent', 'eol', 'start' }
@@ -43,15 +42,71 @@ vim.api.nvim_set_keymap('v', 'S', ':s///g<Left><Left><Left>', { noremap = true }
 -- Easy save
 vim.api.nvim_set_keymap('n', 'W', ':w<CR>', { noremap = true })
 
--- Function or File heading
-function FileHeading()
-    local line = vim.fn.line(".")
-    vim.fn.setline(line, "/*********************************************")
-    vim.fn.append(line, "* Description - ")
-    vim.fn.append(line + 1, "* Author - Vilyaem")
-    vim.fn.append(line + 2, "* *******************************************/")
+local function insert_comment_header()
+  local author = "Vilyaem"
+  local created = os.date("%b %d %Y")
+  local updated = os.date("%b %d %Y")
+  -- local created = os.date("%Y-%m-%d")
+  -- local updated = os.date("%Y-%m-%d")
+  -- comment styles per language
+  local styles = {
+    c =        { "/**********************************************",  "**",  "**********************************************/" },
+    cpp =      { "/**********************************************",  "**",  "**********************************************/" },
+    java =     { "/**********************************************",  "**",  "**********************************************/" },
+    javascript={ "/**********************************************",  "**",  "**********************************************/" },
+    typescript={ "/**********************************************",  "**",  "**********************************************/" },
+    php =      { "/**********************************************",  "**",  "**********************************************/" },
+    python =   { "###############################################",  "##",  "###############################################" },
+    lua =      { "--[[", " ",   "--]]" },
+    sh =       { "###############################################",  "##",  "###############################################" },
+    bash =     { "###############################################",  "##",  "###############################################" },
+    zsh =      { "###############################################",  "##",  "###############################################" },
+    html =     { "<!--", " ",   "-->" },
+    lisp =     { ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",  ";;",  ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" },
+    asm =      { ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",  ";;",  ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" },
+    fasm =     { ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",  ";;",  ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" },
+    forth =    { "(",   " ",    ")" },
+    default =  { "/**********************************************",  "**",  "**********************************************/" },
+  }
+  -- detect language
+  local ft = vim.bo.filetype
+  local style = styles[ft] or styles.default
+
+  -- search for existing header 
+  --local cursor = vim.api.nvim_win_get_cursor(0)
+  --local start_line = math.max(0, cursor[1] - 35)
+  --local lines = vim.api.nvim_buf_get_lines(0, start_line, cursor[1], false)
+
+  --for i, line in ipairs(lines) do
+  --  if line:match("Updated:") then
+  --    -- update the "Updated:" line in place
+  --    local new_line = line:gsub("Updated:%s+[%w%s]+", "Updated:     " .. updated)
+  --    vim.api.nvim_buf_set_lines(0, start_line + i - 1, start_line + i, false, { new_line })
+  --    print("Updated timestamp refreshed.")
+  --    return
+  --  end
+  --end
+
+  -- otherwise, insert a new header
+  local block = {
+    style[1],
+    string.format("%s Description: ", style[2]),
+    string.format("%s Author:      %s", style[2], author),
+    string.format("%s Created:     %s", style[2], created),
+    string.format("%s Updated:     %s", style[2], updated),
+    style[3],
+  }
+
+  vim.api.nvim_put(block, "l", true, true)
 end
-vim.api.nvim_set_keymap('i', '<F4>', '<Esc>:lua FileHeading()<CR>g;kkA', { noremap = true })
+
+
+-- Comment keybinding
+vim.keymap.set("i", "<F4>", function()
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
+  insert_comment_header()
+  vim.api.nvim_feedkeys("i", "n", false)
+end, { noremap = true, silent = true, desc = "Insert or update comment header" })
 
 -- Section
 vim.api.nvim_set_keymap('i', '<F3>', '<Esc>I/*----------!----------*/<Esc>/!<CR>?<CR>xi', { noremap = true })

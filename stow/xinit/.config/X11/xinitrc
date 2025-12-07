@@ -10,4 +10,6 @@ xrdb -merge ~/.Xresources &
 [ -f ~/.cache/wal/colors.sh ] && . ~/.cache/wal/colors.sh
 wal -R &
 xinput set-prop "Elan Touchpad" "libinput Tapping Enabled" 1 &
-exec $1
+clipmenud &
+exec dwm
+#exec $1

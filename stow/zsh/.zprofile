@@ -1,4 +1,4 @@
-#Login to window manager the moment I login to my first tty.
-if [[ $(tty) == /dev/tty1 ]]; then
-    doas slim
-fi
+#Setup everything the moment I log on to my first tty.
+export XINITRC="$HOME/.config/X11/xinitrc"
+export QT_STYLE_OVERRIDE=kvantum
+[ "$(tty)" = "/dev/tty1" ] && exec xinit

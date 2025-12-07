@@ -8,8 +8,8 @@ windows:
   - sigma:
       layout: main-horizontal
       panes:
-        #cd ~/j/ ; nvim dir Journal/$(date -I).md Todo.md Bible.md Books.md Possessions.md
-        #cd ~/j/ ; nvim .
-        cd ~/j/ ; j
+        - cd ~/j/ ; j
+        - vit
+        - pomotask
   - workshop:
       layout: horizontal

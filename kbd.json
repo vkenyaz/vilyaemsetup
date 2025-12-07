@@ -32,13 +32,40 @@
     "@\n2\n2\n@",
     "#\n3\n3\n#",
     "$\n4\n4\n$",
-    "%\n5\n5\n%",
-    "^\n6\n6\n^",
-    "&\n7\n7\n&",
-    "*\n8\n8\n*",
-    "(\n9\n9\n(",
-    "\n0\n0\n0",
-    "_\n-\n[\n{",
+    {
+      "c": "#0099fa",
+      "fa": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "%\n5\n5\n%\n\n\n-Bright",
+    "^\n6\n6\n^\n\n\n+Bright",
+    "&\n7\n7\n&\n\n\nLowBright",
+    {
+      "f": 3
+    },
+    "*\n8\n8\n*\n\n\n-Vol",
+    {
+      "f": 3
+    },
+    "(\n9\n9\n(\n\n\n+Vol",
+    {
+      "f": 3
+    },
+    "\n0\n0\n0\n\n\nMute",
+    {
+      "f": 3
+    },
+    "_\n-\n[\n{\n\n\nAudio",
+    {
+      "c": "#cccccc"
+    },
     "+\n=\n]\n}",
     {
       "a": 6,
@@ -65,17 +92,15 @@
     "E\ne\n.\n>\n\n\nWallp",
     "R\nr\np\nP\n\n\nBrowse",
     "T\nt\ny\nY\n\n\nMedia",
+    "Y\ny\nf\nF\n\n\nBook",
+    "U\nu\ng\nG\n\n\nNews",
+    "I\ni\nc\nC\n\n\nClipm.",
+    "O\no\nr\nR\n\n\nOffice",
+    "P\np\nl\nL\n\n\nScrLk",
+    "{\n[\n/\n?\n\n\nKden",
+    "}\n]\n=\n+\n\n\nBlend.",
     {
-      "c": "#cccccc"
-    },
-    "Y\ny\nf\nF",
-    "U\nu\ng\nG",
-    "I\ni\nc\nC",
-    "O\no\nr\nR",
-    "P\np\nl\nL",
-    "{\n[\n/\n?",
-    "}\n]\n=\n+",
-    {
+      "c": "#cccccc",
       "w": 1.5
     },
     "|\n\\\n\\\n|",
@@ -102,20 +127,16 @@
     },
     "G\ng\ni\nI\n\n\nBigScrShot",
     {
-      "c": "#cccccc",
       "f": 3
     },
-    "H\nh\nd\nD",
-    {
-      "c": "#0099fa"
-    },
+    "H\nh\nd\nD\n\n\nDwnld",
     "J\nj\nh\nH\n\n\nTelegm",
+    "K\nk\nt\nT\n\n\nInvert",
+    "L\nl\nn\nN\n\n\nNmtui",
+    ":\n;\ns\nS\n\n\nSync.",
     {
       "c": "#cccccc"
     },
-    "K\nk\nt\nT",
-    "L\nl\nn\nN",
-    ":\n;\ns\nS",
     "\"\n'\n-\n_",
     {
       "a": 6,
@@ -140,11 +161,28 @@
     "B\nb\nx\nX\n\n\nFm",
     "N\nn\nb\nB\n\n\nObs.",
     {
+      "fa": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "M\nm\nm\nM\n\n\nXFCESet",
+    {
+      "f": 3
+    },
+    "<\n,\nw\nW\n\n\nGimp",
+    {
+      "f": 3
+    },
+    ">\n.\nv\nV\n\n\nVirtm.",
+    {
       "c": "#cccccc"
     },
-    "M\nm\nm\nM",
-    "<\n,\nw\nW",
-    ">\n.\nv\nV",
     "?\n/\nz\nZ",
     {
       "a": 6,

@@ -49,7 +49,6 @@ bash <( curl -fsSL https://codeberg.org/knyz/vilyaemsetup/raw/branch/master/setu
 * Vilyaem's nhkd - the [nano hotkey daemon](https://www.uninformativ.de/git/nhkd/file/README.html), my hotkeys
 
 ## Included Configuration
-
 * [Neovim](https://neovim.io/), the text editor
     * Spell checking
     * Autocompletion and LSP for C programming
@@ -73,6 +72,7 @@ bash <( curl -fsSL https://codeberg.org/knyz/vilyaemsetup/raw/branch/master/setu
     * Visualizer
     * Anki integration
     * Random shuffling (ctrl-r)
+    * Gallery view
 * OpenSCAD
 * xinit
 * spectrwm
@@ -82,13 +82,17 @@ bash <( curl -fsSL https://codeberg.org/knyz/vilyaemsetup/raw/branch/master/setu
 - bar - Status bar
 - cl - Assembly program that clears a terminal
 - killmenu - Kill a process (sorted by CPU usage) with dmenu
-- mmenu - Consume personal media with dmenu
+- mmenu - Consume personal media like a television channel
 - qalcmenu - Do quick Qalculations in dmenu
 - rsb - Russian Synodal Bible (precompiled binary)
 - v - pager, alias, and file-opener
 - vmmenu - Complete Virtual machine management system using dmenu
 - yazi - Yazi file manager (precompiled binary)
 - zoxide - Soy database-based directory navigation tool (precompiled binary)
+- pomo - Pomodoro timer (precompiled binary)
+- pomotask - TUI menu that combines the usage of both taskwarrior and pomo
+- opusfarm - Tool for mass conversion of audio to the OPUS audio codec in parallel, but with
+  preservation of metadata.
 
 
 # Keyboard Layout and Keys
@@ -138,7 +142,8 @@ There are two extra installation scripts available.
 * "cli" - Installs only the command-line environment, helpful for:
     - Setting up a SSH environment
     - Improving the experience of Termux
-    - Allowing you to use your typical desktop environment, but with a
+    - Allowing you to use your typical desktop environment, but with this
+      command-line experience.
 
 ```bash
 bash <( curl -fsSL https://codeberg.org/knyz/vilyaemsetup/raw/branch/master/cli)
@@ -166,5 +171,3 @@ Liberapay: https://liberapay.com/vilyaem/donate
 
 My setup itself, and the contents that I myself have made herein are Public
 Domain CC0, everything else is bound to its respective license.
-
-

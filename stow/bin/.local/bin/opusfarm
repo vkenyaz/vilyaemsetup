@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+###############################################
+## Description: Shell-script that takes a directory of multimedia files, and converts it to
+## the lovely opus codec with metadata preserved in true parallel.
+## Author:      Vilyaem
+## Created:     Nov 10 2025
+## Updated:     Nov 10 2025
+###############################################
+set -euo pipefail
+set -x
+#BR=$(read -rp "Enter desired bitrate in kbps:")
+mkdir -p tmpopus || exit 1 
+
+# read -rp "Enter bitrate (k): " bitrate
+# bitrate="$(echo "$bitrate" | xargs)"  # strip spaces
+# if ! [[ "$bitrate" =~ ^[0-9]+$ ]]; then
+#   echo "Invalid number: $bitrate"
+#   exit 1
+# fi
+# echo "Using bitrate: $bitratek"
+
+
+convert_one() {
+  f="$1"
+  base="$(basename "$f")"
+  name="${base%.*}"
+  out="tmpopus/${name}.opus"
+  cover="${name}.jpg"
+
+  echo "Processing: $f"
+
+  cover="${name}.jpg"
+  ffmpeg -y -i "$f" -an -vcodec mjpeg -frames:v 1 "$cover" 2>/dev/null || cover=""
+
+  # Step 1: Encode audio to Opus
+  #ffmpeg -hide_banner -y -i "$f" -c:a libopus -ac 1 -b:a 128k -vn "$out"
+  ffmpeg -hide_banner -y -i "$f" -c:a libopus -ac 1  -vn "$out"
+
+  # Step 2: Extract metadata
+  artist="$(ffprobe -v error -show_entries format_tags=artist -of default=nw=1:nk=1 "$f" || true)"
+  title="$(ffprobe -v error -show_entries format_tags=title -of default=nw=1:nk=1 "$f" || true)"
+  album="$(ffprobe -v error -show_entries format_tags=album -of default=nw=1:nk=1 "$f" || true)"
+
+  # Step 3: Apply tags and cover with opustags
+  cmd=(opustags -i)
+  [[ -n "$artist" ]] && cmd+=(-s "ARTIST=$artist")
+  [[ -n "$title"  ]] && cmd+=(-s "TITLE=$title")
+  [[ -n "$album"  ]] && cmd+=(-s "ALBUM=$album")
+  [[ -n "$cover"  && -f "$cover" ]] && cmd+=(--set-cover "$cover")
+  cmd+=("$out")
+  "${cmd[@]}"
+  
+  [[ -n "$cover" && -f "$cover" ]] && rm "$cover"
+
+}
+
+export -f convert_one
+
+find . -type f \( -iname "*.mp3" -o -iname "*.m4a" -o -iname "*.mp4" -o -iname "*.webm" -o -iname "*.mkv" -o -iname "*.mov" -o -iname "*.ogg" -o -iname "*.wma" -o -iname "*.opus" \) \
+  -print0 | parallel -0 -j"$(nproc)" --bar convert_one {}

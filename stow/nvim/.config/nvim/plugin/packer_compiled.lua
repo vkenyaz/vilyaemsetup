@@ -145,7 +145,7 @@ _G.packer_plugins = {
     url = "https://github.com/williamboman/mason.nvim"
   },
   ["mkdnflow.nvim"] = {
-    config = { "\27LJ\2\n¹\1\0\0\5\0\n\0\r6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\b\0005\3\4\0005\4\3\0=\4\5\0035\4\6\0=\4\a\3=\3\t\2B\0\2\1K\0\1\0\rmappings\1\0\1\rmappings\0\17MkdnPrevLink\1\3\0\0\6n\n<M-h>\17MkdnNextLink\1\0\2\17MkdnNextLink\0\17MkdnPrevLink\0\1\3\0\0\6n\n<M-l>\nsetup\rmkdnflow\frequire\0" },
+    config = { "\27LJ\2\n¹\1\0\0\5\0\n\0\r6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\b\0005\3\4\0005\4\3\0=\4\5\0035\4\6\0=\4\a\3=\3\t\2B\0\2\1K\0\1\0\rmappings\1\0\1\rmappings\0\17MkdnPrevLink\1\3\0\0\6n\n<M-h>\17MkdnNextLink\1\0\2\17MkdnPrevLink\0\17MkdnNextLink\0\1\3\0\0\6n\n<M-l>\nsetup\rmkdnflow\frequire\0" },
     loaded = true,
     path = "/home/vilyaem/.local/share/nvim/site/pack/packer/start/mkdnflow.nvim",
     url = "https://github.com/jakewvincent/mkdnflow.nvim"
@@ -220,7 +220,7 @@ _G.packer_plugins = {
 time([[Defining packer_plugins]], false)
 -- Config for: mkdnflow.nvim
 time([[Config for mkdnflow.nvim]], true)
-try_loadstring("\27LJ\2\n¹\1\0\0\5\0\n\0\r6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\b\0005\3\4\0005\4\3\0=\4\5\0035\4\6\0=\4\a\3=\3\t\2B\0\2\1K\0\1\0\rmappings\1\0\1\rmappings\0\17MkdnPrevLink\1\3\0\0\6n\n<M-h>\17MkdnNextLink\1\0\2\17MkdnNextLink\0\17MkdnPrevLink\0\1\3\0\0\6n\n<M-l>\nsetup\rmkdnflow\frequire\0", "config", "mkdnflow.nvim")
+try_loadstring("\27LJ\2\n¹\1\0\0\5\0\n\0\r6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\b\0005\3\4\0005\4\3\0=\4\5\0035\4\6\0=\4\a\3=\3\t\2B\0\2\1K\0\1\0\rmappings\1\0\1\rmappings\0\17MkdnPrevLink\1\3\0\0\6n\n<M-h>\17MkdnNextLink\1\0\2\17MkdnPrevLink\0\17MkdnNextLink\0\1\3\0\0\6n\n<M-l>\nsetup\rmkdnflow\frequire\0", "config", "mkdnflow.nvim")
 time([[Config for mkdnflow.nvim]], false)
 
 _G._packer.inside_compile = false

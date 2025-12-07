@@ -6,7 +6,9 @@ cd ~/ || exit 1
 
 # Install necessary packages for setup to work at all
 sudo apt update
-sudo apt -y install git stow
+sudo apt -y install git stow netselect-apt
+sudo netselect-apt stable
+
 
 # Make some directories
 mkdir a b d j m r s w x z

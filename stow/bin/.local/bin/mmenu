@@ -1,19 +1,6 @@
 #!/usr/bin/bash
 #############################################
-# Description - Watch some slop with dmenu
+# Description - Watch some slop
 # Author - Vilyaem
 # ###########################################
-dirs=$(find "$HOME/m/" -type d)
-videos=$(find "$HOME/m/" \
--name "*.mp4" \
--o -name "*.mp3" \
--o -name "*.webm" \
--o -name "*.m4a" \
--o -name "*.ogg" \
--o -name "*.opus" \
--o -name "*.ogg" \
--o -name "*.ogv" \
--o -name "*.mkv")
-video=$(printf "$dirs\n$videos" | dmenu -p "Pick a folder or video to consoom:" -i -l 25) || exit 0
-
-mpv "$video"
+find "$HOME/m/tube/" "$HOME/m/$USER/" -type f -iname "*.mp4" -o -iname "*.webm" -o -iname "*.mkv" -o -iname "*.ogv" | mpv --playlist=-

@@ -6,7 +6,7 @@
 ##########Zsh##########
 source  /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-autoload -Uz compinit -C -d "$ZSH_COMPDUMP/.zcompdump-${ZSH_VERSION}"
+#autoload -Uz compinit -C -d "$ZSH_COMPDUMP/.zcompdump-${ZSH_VERSION}"
 autoload -U colors && colors
 _comp_options+=(globdots)
 # Enable case-insensitive completion
@@ -26,11 +26,13 @@ HISTFILE=~/.cache/zsh_history
 export ZSH_COMPDUMP="$HOME/.cache/zcompdump"
 setopt append_history
 setopt share_history
-export PS1="%{$fg[blue]%}$USER%%%{$reset_color%} %~ "
+#export PS1="%{$fg[blue]%}$USER%%%{$reset_color%} %~ "
+export PS1="%{$fg[blue]%%$reset_color%} %~ "
 #export PS1="$USER%% %~ "
 export PATH="$HOME/.local/bin/:$PATH"
 export PATH="$HOME/r/zig-linux-x86_64-0.13.0/:$PATH"
 export PATH="$HOME/.local/share/cargo/bin/:$PATH"
+export PATH=$PATH:/usr/local/go/bin
 #Add/enable Vi mode
 bindkey -v
 #Arrow key history completion
@@ -51,6 +53,7 @@ export SESSION_MANAGER="slim"
 ##########Ricing##########
 export XCURSOR_THEME="Bibata-Modern-Classic"
 export QT_QPA_PLATFORMTHEME="qt5ct:qt6ct"
+export QT_STYLE_OVERRIDE=kvantum
 eval $(dircolors -b)
 
 ##########Cleanup##########
@@ -78,6 +81,8 @@ alias apc='doas apt list --installed | wc -l'
 alias aplist='doas apt list --installed'
 alias aptar='doas apt -y autoremove'
 alias apti='doas apt install' 
+alias aptu='doas apt install' 
+alias aptui='doas apt install' 
 alias aptiy='doas apt install -y' 
 alias aptr='doas apt -y remove' 
 alias apts='doas apt -y search' 
@@ -147,7 +152,7 @@ bye(){
 
 #Make a journal entry
 j(){
-  vim $HOME/j/Journal/$(date -I).md $HOME/j/Todo.md
+  vim $HOME/j/journal/$(date -I).md  $HOME/j/todos.md
 }
 
 #Download 'Tube links with yt-dlp
@@ -175,5 +180,20 @@ function y(){
   rm -f -- "$tmp"
 }
 
+#Flashdrive one-off backup
+function bkupflash(){
+  LOG="$HOME/.cache/bkupflash"
+  SOURCE="/home/vilyaem/"
+  MOUNTPOINT="/mnt"
+
+  sudo borg create -v --stats --compression lz4 "$MOUNTPOINT/::backup-$(date -I)" "$SOURCE" # >> "$LOG" 2>&1
+  sudo borg prune -v --list "$MOUNTPOINT/" --keep-last 1 # >> "$LOG" 2>&1
+  sudo borg compact -v "$MOUNTPOINT/" # >> "$LOG" 2>&1
+}
+
 ##########Zoxide##########
 eval "$(zoxide init zsh)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
