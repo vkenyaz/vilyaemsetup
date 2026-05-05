@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+notify-send "Your media study session has begun. 📖"
+
+function opener(){
+  echo "$1" | grep -E ".epub|.pdf|.djvu|.azw3|.mobi" && sioyek "$1"
+  echo "$1" | grep -E ".opus|.mp3|.mp4|.mkv|.webm|.wav" && mpv --force-window=yes -loop=inf "$1"
+}
+
+FILE="$HOME/.config/studythis"
+STUDYTIME=300
+
+while IFS= read -r file; do
+    [[ -z "$file" ]] && continue  # skip empty lines
+    printf "studying: $file\n"
+    opener "$file" &
+    pid=$!
+    sleep "$STUDYTIME"
+    pkill -TERM -P "$pid"
+    # pkill -KILL -P "$pid"
+    # kill -KILL  "$pid"
+done < "$FILE"
+
+notify-send "Your media study session is complete. 📖"

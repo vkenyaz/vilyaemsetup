@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/home/vilyaem/.cache/nvim/packer_hererocks/2.1.1734355927/share/lua/5.1/?.lua;/home/vilyaem/.cache/nvim/packer_hererocks/2.1.1734355927/share/lua/5.1/?/init.lua;/home/vilyaem/.cache/nvim/packer_hererocks/2.1.1734355927/lib/luarocks/rocks-5.1/?.lua;/home/vilyaem/.cache/nvim/packer_hererocks/2.1.1734355927/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/home/vilyaem/.cache/nvim/packer_hererocks/2.1.1734355927/lib/lua/5.1/?.so"
+local package_path_str = "/home/vilyaem/.cache/nvim/packer_hererocks/2.1.1741730670/share/lua/5.1/?.lua;/home/vilyaem/.cache/nvim/packer_hererocks/2.1.1741730670/share/lua/5.1/?/init.lua;/home/vilyaem/.cache/nvim/packer_hererocks/2.1.1741730670/lib/luarocks/rocks-5.1/?.lua;/home/vilyaem/.cache/nvim/packer_hererocks/2.1.1741730670/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/home/vilyaem/.cache/nvim/packer_hererocks/2.1.1741730670/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -78,6 +78,17 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/vilyaem/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
+  },
+  ["auto-pairs"] = {
+    loaded = true,
+    path = "/home/vilyaem/.local/share/nvim/site/pack/packer/start/auto-pairs",
+    url = "https://github.com/jiangmiao/auto-pairs"
+  },
+  ["aw-watcher.nvim"] = {
+    config = { "\27LJ\2\nv\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\14aw_server\1\0\1\14aw_server\0\1\0\2\tport\3à+\thost\014127.0.0.1\nsetup\15aw_watcher\frequire\0" },
+    loaded = true,
+    path = "/home/vilyaem/.local/share/nvim/site/pack/packer/start/aw-watcher.nvim",
+    url = "https://github.com/lowitea/aw-watcher.nvim"
   },
   ["calculator.nvim"] = {
     loaded = true,
@@ -144,12 +155,6 @@ _G.packer_plugins = {
     path = "/home/vilyaem/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
-  ["mkdnflow.nvim"] = {
-    config = { "\27LJ\2\n¹\1\0\0\5\0\n\0\r6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\b\0005\3\4\0005\4\3\0=\4\5\0035\4\6\0=\4\a\3=\3\t\2B\0\2\1K\0\1\0\rmappings\1\0\1\rmappings\0\17MkdnPrevLink\1\3\0\0\6n\n<M-h>\17MkdnNextLink\1\0\2\17MkdnPrevLink\0\17MkdnNextLink\0\1\3\0\0\6n\n<M-l>\nsetup\rmkdnflow\frequire\0" },
-    loaded = true,
-    path = "/home/vilyaem/.local/share/nvim/site/pack/packer/start/mkdnflow.nvim",
-    url = "https://github.com/jakewvincent/mkdnflow.nvim"
-  },
   ["nvim-autopairs"] = {
     loaded = true,
     path = "/home/vilyaem/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
@@ -180,11 +185,6 @@ _G.packer_plugins = {
     path = "/home/vilyaem/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
-  ["oil.nvim"] = {
-    loaded = true,
-    path = "/home/vilyaem/.local/share/nvim/site/pack/packer/start/oil.nvim",
-    url = "https://github.com/stevearc/oil.nvim"
-  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/home/vilyaem/.local/share/nvim/site/pack/packer/start/packer.nvim",
@@ -210,6 +210,11 @@ _G.packer_plugins = {
     path = "/home/vilyaem/.local/share/nvim/site/pack/packer/start/vim-buftabline",
     url = "https://github.com/ap/vim-buftabline"
   },
+  vimwiki = {
+    loaded = true,
+    path = "/home/vilyaem/.local/share/nvim/site/pack/packer/start/vimwiki",
+    url = "https://github.com/vimwiki/vimwiki"
+  },
   ["which-key.nvim"] = {
     loaded = true,
     path = "/home/vilyaem/.local/share/nvim/site/pack/packer/start/which-key.nvim",
@@ -218,10 +223,10 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: mkdnflow.nvim
-time([[Config for mkdnflow.nvim]], true)
-try_loadstring("\27LJ\2\n¹\1\0\0\5\0\n\0\r6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\b\0005\3\4\0005\4\3\0=\4\5\0035\4\6\0=\4\a\3=\3\t\2B\0\2\1K\0\1\0\rmappings\1\0\1\rmappings\0\17MkdnPrevLink\1\3\0\0\6n\n<M-h>\17MkdnNextLink\1\0\2\17MkdnPrevLink\0\17MkdnNextLink\0\1\3\0\0\6n\n<M-l>\nsetup\rmkdnflow\frequire\0", "config", "mkdnflow.nvim")
-time([[Config for mkdnflow.nvim]], false)
+-- Config for: aw-watcher.nvim
+time([[Config for aw-watcher.nvim]], true)
+try_loadstring("\27LJ\2\nv\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\14aw_server\1\0\1\14aw_server\0\1\0\2\tport\3à+\thost\014127.0.0.1\nsetup\15aw_watcher\frequire\0", "config", "aw-watcher.nvim")
+time([[Config for aw-watcher.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

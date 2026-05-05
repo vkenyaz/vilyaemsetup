@@ -21,6 +21,7 @@ vim.opt.spelllang = 'en_gb'
 vim.opt.shiftwidth = 2
 vim.opt.viminfo = ''
 vim.opt.history = 1000
+vim.opt.clipboard = "unnamedplus"
 
 --Colouring
 vim.cmd("highlight Comment guifg=NONE ")
@@ -44,8 +45,8 @@ vim.api.nvim_set_keymap('n', 'W', ':w<CR>', { noremap = true })
 
 local function insert_comment_header()
   local author = "Vilyaem"
-  local created = os.date("%b %d %Y")
-  local updated = os.date("%b %d %Y")
+  -- local created = os.date("%b %d %Y")
+  -- local updated = os.date("%b %d %Y")
   -- local created = os.date("%Y-%m-%d")
   -- local updated = os.date("%Y-%m-%d")
   -- comment styles per language
@@ -92,8 +93,8 @@ local function insert_comment_header()
     style[1],
     string.format("%s Description: ", style[2]),
     string.format("%s Author:      %s", style[2], author),
-    string.format("%s Created:     %s", style[2], created),
-    string.format("%s Updated:     %s", style[2], updated),
+    -- string.format("%s Created:     %s", style[2], created),
+    -- string.format("%s Updated:     %s", style[2], updated),
     style[3],
   }
 
@@ -130,6 +131,16 @@ vim.keymap.set("n", "<leader>dw", "<cmd>GdbWatch<cr>", { noremap = true, silent 
 -- Calculate expression plugin
 vim.api.nvim_create_user_command("Calculate", "lua require(\"calculator\").calculate()",
     { ["range"] = 1, ["nargs"] = 0 })
+
+--Vimwiki
+vim.g.vimwiki_list = {
+  {
+    path = '~/k/',
+    syntax = 'markdown',
+    ext = '.md',
+  }
+}
+vim.g.vimwiki_global_ext = 0
 
 --softwrap
 vim.api.nvim_create_autocmd("FileType", {
@@ -186,33 +197,43 @@ require('packer').startup(function(use)
   use{"ThePrimeagen/vim-be-good"}
   use{"folke/which-key.nvim"}
   use{"ap/vim-buftabline"}
-  use{"stevearc/oil.nvim"}
+  use{"jiangmiao/auto-pairs"}
 
-  use({'jakewvincent/mkdnflow.nvim',
+  use {'vimwiki/vimwiki'}
+
+  use { "lowitea/aw-watcher.nvim",
   config = function()
-  require('mkdnflow').setup({
-  -- Config goes here; leave blank for defaults
-      mappings = {
-        MkdnNextLink = {'n', '<M-l>'},
-        MkdnPrevLink = {'n', '<M-h>'},
+  require("aw_watcher").setup({
+      aw_server = {
+          host = "127.0.0.1",
+          port = 5600,
+      },
+    })
+    end,
     }
-  })
-  end
-  })
+
+  -- use({'jakewvincent/mkdnflow.nvim',
+  -- config = function()
+  -- require('mkdnflow').setup({
+  -- -- Config goes here; leave blank for defaults
+  --     mappings = {
+  --       MkdnNextLink = {'n', '<M-l>'},
+  --       MkdnPrevLink = {'n', '<M-h>'},
+  --   }
+  -- })
+  -- end
+  -- })
 
 
 
   if packer_bootstrap then
     require('packer').sync()
-  end
-end)
-
-
+  end end)
 -- Setup installed plugins
 require("nvim-tree").setup()
 require("mason").setup()
 require("telescope").setup{}
-require("oil").setup{}
+
 
 
 require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./" } })
@@ -295,20 +316,6 @@ map("n", "<leader>t", function()
   --vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("kdd", true, false, true), "n", true)
 end, { desc = "Insert time as Markdown section" })
 
--- Open oil on directory or empty file with nothing in stdin
-vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    local args = vim.fn.argv()
-    local stdin = vim.fn.line2byte('$') ~= -1
-    local dir = vim.fn.isdirectory(args[1] or "")
-
-    if #args == 0 and not stdin then
-      require("oil").open()
-    elseif #args == 1 and dir == 1 then
-      require("oil").open(args[1])
-    end
-  end,
-})
 
 -- Key mappings for tab/buffer navigation
 vim.api.nvim_set_keymap('n', '<Tab>', ':bnext<CR>', { noremap = true, silent = true })

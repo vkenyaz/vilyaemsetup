@@ -22,7 +22,7 @@ mpv $*
 sxiv $*
 ;;
 *djvu*|*pdf*|*epub*)
-koreader $*
+sioyek $*
 ;;
 *docx*|*odt*|*rtf*|*xls*|*xlsx*|*ppt*|*pptx*)
 libreoffice $*

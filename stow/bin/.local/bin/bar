@@ -46,5 +46,5 @@ BAR="☦️[⌚$DATE][📖$VOTD][$WEATHER][💿$DSK][🔋$BAT]"
 
 xsetroot -name "$BAR" 
 
-sleep 32
+sleep 60
 done

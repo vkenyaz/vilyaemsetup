@@ -1,0 +1,20 @@
+#!/bin/env zsh
+pgrep tmux && tmux a
+session="work"
+tmux new-session -d -s work nvim ~/k/{journal/$(date -I).md,index.md,wiki/readme.md}
+
+tmux rename-window -t $session:1 'sigma'
+tmux split-window -h -t $session:1 \; select-pane -T vit
+tmux new-window -t $session:2 -n 'business'
+tmux split-window -h -t $session:2
+tmux new-window -t $session:3 -n 'workshop'
+
+# The first pane is already dealt with
+tmux send-keys -t $session:1.2 'vit' C-m
+
+tmux send-keys -t $session:2.1 'zsh' C-m
+tmux send-keys -t $session:2.2 'glances' C-m
+
+tmux select-window -t $session:1
+
+tmux a

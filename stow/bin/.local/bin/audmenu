@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 #############################################
 # Description - Tell Audacious, my dedicated music player, to play a song
 # Author - Vilyaem

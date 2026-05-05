@@ -27,12 +27,10 @@ export ZSH_COMPDUMP="$HOME/.cache/zcompdump"
 setopt append_history
 setopt share_history
 #export PS1="%{$fg[blue]%}$USER%%%{$reset_color%} %~ "
-export PS1="%{$fg[blue]%%$reset_color%} %~ "
+export PS1="%{$fg[blue]%%($(task count +PENDING))$reset_color%} %~ "
 #export PS1="$USER%% %~ "
 export PATH="$HOME/.local/bin/:$PATH"
-export PATH="$HOME/r/zig-linux-x86_64-0.13.0/:$PATH"
-export PATH="$HOME/.local/share/cargo/bin/:$PATH"
-export PATH=$PATH:/usr/local/go/bin
+export PATH="$HOME/.nix-profile/bin:$PATH"
 #Add/enable Vi mode
 bindkey -v
 #Arrow key history completion
@@ -51,9 +49,6 @@ export TERMINAL="st"
 export SESSION_MANAGER="slim"
 
 ##########Ricing##########
-export XCURSOR_THEME="Bibata-Modern-Classic"
-export QT_QPA_PLATFORMTHEME="qt5ct:qt6ct"
-export QT_STYLE_OVERRIDE=kvantum
 eval $(dircolors -b)
 
 ##########Cleanup##########
@@ -61,7 +56,6 @@ export INPUTRC="~/.config/readline/.inputrc"
 export XINITRC="$HOME/.config/X11/xinitrc"
 #export PYTHONSTARTUP="$HOME/.config/pythonrc"
 export LESSHISTFILE="-"
-#export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export ASPELL_CONF="per-conf $XDG_CONFIG_HOME/aspell/aspell.conf; personal $XDG_DATA_HOME/aspell/en.pws; repl $XDG_DATA_HOME/aspell/en.prepl"
 export ICEAUTHORITY="$XDG_CACHE_HOME/ICEauthority"
 export ELECTRUMDIR="$XDG_DATA_HOME/electrum"
@@ -81,13 +75,14 @@ alias apc='doas apt list --installed | wc -l'
 alias aplist='doas apt list --installed'
 alias aptar='doas apt -y autoremove'
 alias apti='doas apt install' 
-alias aptu='doas apt install' 
-alias aptui='doas apt install' 
 alias aptiy='doas apt install -y' 
 alias aptr='doas apt -y remove' 
 alias apts='doas apt -y search' 
+alias aptu='doas apt install' 
+alias aptui='doas apt install' 
 alias c='./c.sh' 
 alias dosbox="dosbox -conf $HOME/.config/dosbox/dosbox.conf" 
+alias dsu="doas su"
 alias dwifi='doas rfkill block wifi' 
 alias emsetup='cd ~/r/emsdk/ && ./emsdk activate latest && source ./emsdk_env.sh && pwd' 
 alias gc='git clone --recurse-submodules --depth=1' 
@@ -97,9 +92,11 @@ alias ghex='grabc -hex'
 alias gmt='xdg-mime query filetype $1' 
 alias grgb='grabc -rgb' \
 alias hosted='doas v /etc/hosts ; exit' 
-alias l='\ls --color=auto --group-directories-first' 
-alias ls='ls --color=auto -lah' 
+alias ll='eza -lah --icons --git'
+alias llh='eza -lah --icons --git --header'
+alias ls='eza --icons'
 alias makeiso='xorriso -as mkisofs -o $1.iso .' 
+alias ncdu='ncdu --color off'
 alias pg='ps aux | grep' 
 alias phptmp='doas php -S localhost:80' 
 alias printer='system-config-printer' 
@@ -124,6 +121,7 @@ alias webcam='mpv /dev/video0'
 alias xb='xbacklight -set $1' 
 alias yt='ytfzf --ii=inv.nadeko.net --show-thumbnails -T chafa --max-threads=$(nproc)' 
 alias zipup='zip -r $1.zip $1 &&  rm $1'
+alias zq="zoxide query $@"
 
 ##########Shell functions & utilities##########
 
@@ -151,8 +149,9 @@ bye(){
 }
 
 #Make a journal entry
-j(){
-  vim $HOME/j/journal/$(date -I).md  $HOME/j/todos.md
+k(){
+  cd ~/k/
+  vim journal/$(date -I).md  k/index.md k/wiki/readme.md
 }
 
 #Download 'Tube links with yt-dlp

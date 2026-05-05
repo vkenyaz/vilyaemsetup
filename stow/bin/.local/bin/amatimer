@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 #############################################
 # Description - Helpful General-Purpose timer
 # using Zenity and qalc to parse complex time expressions

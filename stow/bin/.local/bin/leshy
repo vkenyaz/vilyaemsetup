@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# A simple virtual machine launcher.
+CHOICE=$(\ls "$HOME/.config/leshy/vms/" | dmenu -l 5)
+[ -z "$CHOICE" ] && exit;
+. "$HOME/.config/leshy/vms/$CHOICE"
+cd "$HOME/.config/leshy/disks/"
+qemu-system-"$ARCH" $FLAGS

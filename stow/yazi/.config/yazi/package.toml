@@ -1,0 +1,7 @@
+[plugin]
+deps = []
+
+[[flavor.deps]]
+use = "ZimCodes/yazi-flavors:obsidian-soft-glow"
+rev = "c64630b"
+hash = "7b2ebed2c360ea8eb9312208474b71cd"
