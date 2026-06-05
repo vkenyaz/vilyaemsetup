@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+###############################################
+## Description: Botulism, a simple encrypted password
+## picker that uses dmenu, age, and expect.
+##
+## https://www.youtube.com/watch?v=iLW2-O45MV0 
+##
+## Learn more on dmenu, age, and expect:
+## https://manned.org/man/dmenu
+## https://manned.org/man/age
+## https://manned.org/man/expect
+##
+## Author:      Vilyaem
+###############################################
+
+export VAULT="/x/20-29-credentials/20-pass/pass.vlt"
+#export VAULT="pass.vlt"
+
+# ask for master password
+export MASTER=$(dmenu -p "Master:" < /dev/null)
+
+# decrypt the age vault by filling the prompt and extracting the info
+PASSSRC=$(expect << 'EOF' 
+#log_file -a debug.log
+#log_user 1
+#exp_internal 1
+set timeout 5
+spawn age -d "$env(HOME)/$env(VAULT)" 
+expect -re "Enter passphrase: "
+send "$env(MASTER)\n"
+# it does a ANSI sequence to clear a line, avoid that
+sleep 1 
+#expect -re "(.+)"
+#puts $expect_out(1,string)
+expect eof
+puts $expect_out(buffer)
+EOF
+)
+
+# filter the slop
+PASSSRC=$(echo "$PASSSRC" | tail -n +3 | strings)
+
+# abort if decryption failed
+[ -z "$PASSSRC" ] && exit 1
+
+#select entry(assumes "name,password" format)
+ENTRY=$(printf "%s\n" "$PASSSRC" | dmenu -l 30 -p "Select:")
+
+# abort if user refused to select
+[ -z "$ENTRY" ] && exit 1
+
+# extract password
+PASS=$(printf "%s" "$ENTRY" | cut -d ';' -f1 -)
+
+# type it
+xdotool type --clearmodifiers "$PASS"

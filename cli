@@ -14,8 +14,7 @@ cd .vilyaemsetup || exit 1
 
 
 # Install packages
-#sudo apt install -y $(cat "pkgs.txt") || exit 1
-sudo apt install zsh neovim htop tmux
+sudo apt install zsh neovim htop tmux vim
 
 # Install stowed configs, scripts and binaries
 cd stow || exit 1
@@ -30,5 +29,6 @@ stow -t -v ~ "yazi"
 stow -t -v ~ "zsh"
 
 cd ~ || exit 1
+
 
 printf "Vilyaem's cli-only setup has been installed\n"

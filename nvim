@@ -1,27 +1,15 @@
 #!/bin/sh
 clear
 set -x
-cd ~/ || exit 1
+cd ~ || exit 1
 
-# Install necessary packages for setup to work at all
-sudo apt update
-sudo apt -y install git stow
+sudo apt install curl neovim vim || exit 1
 
-# Clone setup repository
-git clone --depth=1 --recurse-submodules https://codeberg.org/knyz/vilyaemsetup.git || exit 1
-mv vilyaemsetup .vilyaemsetup || exit 1
-cd .vilyaemsetup || exit 1
-
-
-# Install packages
-#sudo apt install -y $(cat "pkgs.txt") || exit 1
-sudo apt install zsh neovim htop tmux
-
-# Install stowed configs, scripts and binaries
-cd stow || exit 1
-
-stow -t -v ~ "neovim"
-stow -t -v ~ "vim"
+# Just curl down the .vimrc and init.lua
+curl -O https://codeberg.org/knyz/vilyaemsetup/raw/branch/master/stow/vim/.vimrc || exit 1
+mkdir -p ~/.config/nvim/ || exit 1
+cd ~/.config/nvim/ || exit 1
+curl -O https://codeberg.org/knyz/vilyaemsetup/raw/branch/master/stow/nvim/.config/nvim/init.lua
 
 cd ~ || exit 1
 

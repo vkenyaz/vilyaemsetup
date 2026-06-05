@@ -6,6 +6,7 @@
 ##########Zsh##########
 source  /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source <(fzf --zsh)
 #autoload -Uz compinit -C -d "$ZSH_COMPDUMP/.zcompdump-${ZSH_VERSION}"
 autoload -U colors && colors
 _comp_options+=(globdots)
@@ -26,13 +27,13 @@ HISTFILE=~/.cache/zsh_history
 export ZSH_COMPDUMP="$HOME/.cache/zcompdump"
 setopt append_history
 setopt share_history
-#export PS1="%{$fg[blue]%}$USER%%%{$reset_color%} %~ "
-export PS1="%{$fg[blue]%%($(task count +PENDING))$reset_color%} %~ "
-#export PS1="$USER%% %~ "
+setopt PROMPT_SUBST
+export PROMPT='%F{cyan}%~%f $(task count +PENDING) %(?. .[%?]) %% '
 export PATH="$HOME/.local/bin/:$PATH"
 export PATH="$HOME/.nix-profile/bin:$PATH"
 #Add/enable Vi mode
 bindkey -v
+bindkey '^R' fzf-history-widget
 #Arrow key history completion
 bindkey '^[[A' history-search-backward
 bindkey '^[[B' history-search-forward
@@ -43,10 +44,12 @@ export BROWSER="librewolf"
 export BUG_PROJECT=$(pwd)/bug
 export CC="gcc"
 export EDITOR="v"
-#export MANPAGER='nvim +Man!'
-export MANPAGER='sh -c "col -b | nvim -R -"'
+export MANROFFOPT='-c'
+export GROFF_NO_SGR=1
+export MANPAGER='nvim +Man!'
 export TERMINAL="st"
 export SESSION_MANAGER="slim"
+export RLWRAP_EDITOR="vim '+call cursor(%L,%C)'"
 
 ##########Ricing##########
 eval $(dircolors -b)
@@ -74,6 +77,8 @@ alias alsafix='for x in `amixer controls  | grep layback` ; do amixer cset "${x}
 alias apc='doas apt list --installed | wc -l'
 alias aplist='doas apt list --installed'
 alias aptar='doas apt -y autoremove'
+alias aptfi='doas apt install -y "$(fzf $(apt list))"'
+alias aptfr='doas apt remove -y "$(fzf $(apt list))"'
 alias apti='doas apt install' 
 alias aptiy='doas apt install -y' 
 alias aptr='doas apt -y remove' 
@@ -96,6 +101,7 @@ alias ll='eza -lah --icons --git'
 alias llh='eza -lah --icons --git --header'
 alias ls='eza --icons'
 alias makeiso='xorriso -as mkisofs -o $1.iso .' 
+alias moc="mocp -T transparent-background -m $HOME/m/music/"
 alias ncdu='ncdu --color off'
 alias pg='ps aux | grep' 
 alias phptmp='doas php -S localhost:80' 
@@ -177,6 +183,16 @@ function y(){
     builtin cd -- "$cwd"
   fi
   rm -f -- "$tmp"
+}
+
+# Fun helper to edit age encrypted files, not secure at all
+function ageed(){
+  base="${1%.*}"
+  tmp=$(mktemp)
+  age -d "$1" > "$tmp" || return 1
+  vi "$tmp" || return 1
+  age -p "$tmp" > "${base}.vlt"
+  rm -f "$tmp" /tmp/tmp.*
 }
 
 #Flashdrive one-off backup

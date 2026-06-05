@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/usr/bin/env bash
 clear
-set -x
+set -ex
 cd ~/ || exit 1
 
 
@@ -11,10 +11,10 @@ sudo netselect-apt stable
 
 
 # Make some directories
-mkdir a b d j m r s w x z
+mkdir -p a b d j m r s w x z || exit 1
 
 # Remove default DE directories
-rmdir Desktop Downloads Videos Documents Pictures Public Templates 
+rmdir Desktop Downloads Videos Documents Pictures Public Templates  || exit 1
 
 # Clone setup repository
 git clone --depth=1 --recurse-submodules https://codeberg.org/knyz/vilyaemsetup.git || exit 1
@@ -26,11 +26,21 @@ cp wallpapers/* "$HOME/w/"
 # Install packages
 sudo apt install -y $(cat "pkgs.txt") || exit 1
 
+# Install nix
+sh <(curl -L https://nixos.org/nix/install) --no-daemon
+. "$HOME/.nix-profile/etc/profile.d/nix.sh"
+
+# install nix packages into profile
+while IFS= read -r pkg || [ -n "$pkg" ]; do
+  [ -z "$pkg" ] && continue
+  nix profile install "nixpkgs#$pkg" || exit 1
+done < nixpkgs.txt
+
 # Install stowed configs, scripts and binaries
 cd stow || exit 1
 
 for f in *; do 
-stow -t -v ~ "$f"
+stow -v -t ~ "$f"
 done
 
 # Compile and install custom software
@@ -53,7 +63,7 @@ sudo apt update && sudo apt install librewolf -y
 # Initialize browser profile & install extensions into Librewolf
 librewolf -CreateProfile "default"
 cp browser/* "$HOME/".librewolf/*.default-default/extensions/
-ln -s ~/.mozilla/native-messaging-hosts ~/.librewolf/native-messaging-hosts
+ln -sfn ~/.mozilla/native-messaging-hosts ~/.librewolf/native-messaging-hosts
 
 # Turn off lightdm, turn on slim
 sudo rc-update del lightdm

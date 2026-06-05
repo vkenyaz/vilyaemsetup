@@ -7,19 +7,19 @@ xset r rate 300 100 &
 picom &
 setxkbmap -option caps:escape us dvorak &
 xbanish &
-nhkd &
-redshift -p &
+redshift  &2
 xinput set-prop "Elan Touchpad" "libinput Tapping Enabled" 1 &
 xinput set-prop "Logitech USB Optical Mouse" "libinput Accel Profile Enabled" 0, 1 &
 clipmenud &
-xwallpaper --stretch $(\ls $HOME/w/*.jpg | shuf -n 1)
+find "$HOME/w" -name '*.jpg' | shuf -n 1 | xargs xwallpaper --stretch &
 autocutsel -fork
 autocutsel -selection PRIMARY -fork
 xset s 300
-xss-lock --transfer-sleep-lock -- physlock &
+xss-lock --transfer-sleep-lock -- slock &
 aw-server & 
 a|w-watcher-afk & 
 aw-watcher-window & 
+nhkd &
 exec dwm
 #exec dbus-launch --exit-with-session exec dwm
 #exec $1

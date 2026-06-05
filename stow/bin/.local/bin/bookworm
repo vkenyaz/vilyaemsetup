@@ -21,4 +21,7 @@ while IFS= read -r file; do
     # kill -KILL  "$pid"
 done < "$FILE"
 
+bibletime &
+sleep "$STUDYTIME"
+
 notify-send "Your media study session is complete. 📖"

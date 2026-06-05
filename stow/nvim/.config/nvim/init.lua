@@ -8,20 +8,23 @@ vim.g.mapleader = " "
 --Vilyaem's Settings
 vim.opt.autoindent = true
 vim.opt.backspace = { 'indent', 'eol', 'start' }
+vim.opt.clipboard = "unnamedplus"
 vim.opt.encoding = 'utf-8'
 vim.opt.expandtab = true
+vim.opt.foldlevel = 99
+vim.opt.foldmethod = "syntax"
+vim.opt.history = 2048
 vim.opt.lazyredraw = true
 vim.opt.list = true
-vim.opt.listchars = { tab = '>.' }
+vim.opt.listchars = {tab = "»·",trail = "·",extends = ">",precedes = "<",}
 vim.opt.mouse = 'a'
-vim.opt.swapfile = false
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.spelllang = 'en_gb'
 vim.opt.shiftwidth = 2
+vim.opt.spelllang = 'en_gb'
+vim.opt.swapfile = false
 vim.opt.viminfo = ''
-vim.opt.history = 1000
-vim.opt.clipboard = "unnamedplus"
+vim.opt.virtualedit = "all"
 
 --Colouring
 vim.cmd("highlight Comment guifg=NONE ")
@@ -45,10 +48,6 @@ vim.api.nvim_set_keymap('n', 'W', ':w<CR>', { noremap = true })
 
 local function insert_comment_header()
   local author = "Vilyaem"
-  -- local created = os.date("%b %d %Y")
-  -- local updated = os.date("%b %d %Y")
-  -- local created = os.date("%Y-%m-%d")
-  -- local updated = os.date("%Y-%m-%d")
   -- comment styles per language
   local styles = {
     c =        { "/**********************************************",  "**",  "**********************************************/" },
@@ -73,28 +72,11 @@ local function insert_comment_header()
   local ft = vim.bo.filetype
   local style = styles[ft] or styles.default
 
-  -- search for existing header 
-  --local cursor = vim.api.nvim_win_get_cursor(0)
-  --local start_line = math.max(0, cursor[1] - 35)
-  --local lines = vim.api.nvim_buf_get_lines(0, start_line, cursor[1], false)
-
-  --for i, line in ipairs(lines) do
-  --  if line:match("Updated:") then
-  --    -- update the "Updated:" line in place
-  --    local new_line = line:gsub("Updated:%s+[%w%s]+", "Updated:     " .. updated)
-  --    vim.api.nvim_buf_set_lines(0, start_line + i - 1, start_line + i, false, { new_line })
-  --    print("Updated timestamp refreshed.")
-  --    return
-  --  end
-  --end
-
   -- otherwise, insert a new header
   local block = {
     style[1],
     string.format("%s Description: ", style[2]),
     string.format("%s Author:      %s", style[2], author),
-    -- string.format("%s Created:     %s", style[2], created),
-    -- string.format("%s Updated:     %s", style[2], updated),
     style[3],
   }
 
@@ -103,30 +85,52 @@ end
 
 
 -- Comment keybinding
-vim.keymap.set("i", "<F4>", function()
+vim.keymap.set("i", "<leader>h/", function()
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
   insert_comment_header()
   vim.api.nvim_feedkeys("i", "n", false)
 end, { noremap = true, silent = true, desc = "Insert or update comment header" })
 
--- Section
-vim.api.nvim_set_keymap('i', '<F3>', '<Esc>I/*----------!----------*/<Esc>/!<CR>?<CR>xi', { noremap = true })
+-- Section banners
+
+local function insert_banner()
+  local text = vim.fn.input("Section name: ")
+
+  local width = 80 -- I use 80
+  local left = "/*"
+  local right = "*/"
+  local fill = ";"
+
+  -- account for spaces around title
+  local inner_width = width - #left - #right
+  local content_width = #text + 2
+
+  local padding = inner_width - content_width
+
+  if padding < 0 then
+    padding = 0
+  end
+
+  local leftpad = math.floor(padding / 2)
+  local rightpad = padding - leftpad
+
+  local line =
+    left ..
+    string.rep(fill, leftpad) ..
+    " " .. string.upper(text) .. " " ..
+    string.rep(fill, rightpad) ..
+    right
+
+  vim.api.nvim_put({ line }, "l", true, true)
+end
+
+vim.keymap.set("i", "<leader>s/", insert_banner,{ desc = "Insert section banner", noremap = true})
 
 -- F6 talk to the soybot
 vim.api.nvim_set_keymap("n","<F6>","<Esc>:Gen<CR>",{noremap = true, silent = true})
 
 -- Somehow this was unset.
 vim.api.nvim_set_keymap('n', '<C-v>', '<C-v>', { noremap = true, silent = true })
-
--- Set the key mappings for the GDB commands
-vim.keymap.set("n", "<leader>db", "<cmd>GdbStart<cr>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>dc", "<cmd>GdbContinue<cr>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>dn", "<cmd>GdbNext<cr>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>ds", "<cmd>GdbStep<cr>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>di", "<cmd>GdbStepInto<cr>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>do", "<cmd>GdbStepOut<cr>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>db", "<cmd>GdbBreakpoint<cr>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>dw", "<cmd>GdbWatch<cr>", { noremap = true, silent = true })
 
 -- Calculate expression plugin
 vim.api.nvim_create_user_command("Calculate", "lua require(\"calculator\").calculate()",
@@ -188,7 +192,6 @@ require('packer').startup(function(use)
   use{"williamboman/mason.nvim"}
   use{"williamboman/mason-lspconfig.nvim"}
   use{"windwp/nvim-autopairs"}
-  use{"sakhnik/nvim-gdb"}
   use{"neovim/nvim-lspconfig"}
   use{"nvim-tree/nvim-tree.lua"}
   use{"nvim-treesitter/nvim-treesitter"}
@@ -197,7 +200,8 @@ require('packer').startup(function(use)
   use{"ThePrimeagen/vim-be-good"}
   use{"folke/which-key.nvim"}
   use{"ap/vim-buftabline"}
-  use{"jiangmiao/auto-pairs"}
+  use{"kylechui/nvim-surround"}
+  use{"gpanders/nvim-parinfer"}
 
   use {'vimwiki/vimwiki'}
 
@@ -306,6 +310,7 @@ map("n", "<C-j>", "<C-w>j", { desc = "switch window down" })
 map("n", "<C-k>", "<C-w>k", { desc = "switch window up" })
 map("n", "<Esc>", "<cmd>noh<CR>", { desc = "general clear highlights" })
 map("n", "<C-s>", "<cmd>w<CR>", { desc = "general save file" })
+map("n", "+", "<cmd>!clang-format -i %<CR><CR>", { desc = "format file using clang-format" })
 map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "general copy whole file" })
 
 
@@ -345,8 +350,8 @@ map("n", "<leader>gt", "<cmd>Telescope git_status<CR>", { desc = "telescope git 
 map("n", "<leader>pt", "<cmd>Telescope terms<CR>", { desc = "telescope pick hidden term" })
 
 --luasnip snapping
-vim.api.nvim_set_keymap("i", "<Ctrl-j>", "<cmd>lua require('luasnip').jump(1)<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("i", "<Ctrl-k>", "<cmd>lua require('luasnip').jump(-1)<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("i", "<leader>j", "<cmd>lua require('luasnip').jump(1)<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("i", "<leader>k", "<cmd>lua require('luasnip').jump(-1)<CR>", { noremap = true, silent = true })
 
 
 map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "telescope find files" })

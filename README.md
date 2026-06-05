@@ -1,20 +1,25 @@
 # Vilyaem's Setup
 
 
-![Desktop Screenshot](desktop.png)
+![Desktop Screenshot #1](desktop01.png)
+![Desktop Screenshot #2](desktop02.png)
 
 This repository contains my [Devuan](https://en.wikipedia.org/wiki/Devuan)
-[OpenRC](https://en.wikipedia.org/wiki/OpenRC) setup, including personal
-scripts/programs, configuration and forks of various programs I use, there is a
-script, 'setup' that is used to automatically install it on a new machine. GNU
-stow is used to have a symlink-based setup.
+[OpenRC](https://en.wikipedia.org/wiki/OpenRC) setup, including, but not limited
+to:
+
+- personal scripts & programs, 
+- configuration 
+- forks of various programs
+- wallpapers
+- themes
+
+There is a script, 'setup' that is used to help automate installs. GNU stow is
+used to have a symlink-based setup.
 
 ***This script might work on just Debian, and most likely other versions of
 Devuan with differing init systems, no guarantees on any of this of course.
 This is meant just for my personal usecase.***
-
-
-My system never breaks, it's easy to pick up and maintain, and runs fast.
 
 
 ## How to Install
@@ -54,7 +59,7 @@ bash <( curl -fsSL https://codeberg.org/knyz/vilyaemsetup/raw/branch/master/setu
     * Autocompletion and LSP for C programming
     * File tree
     * Markdown flow
-    * Easy NVchad style buffer/tab navigation
+    * Easy NVchad-style buffer/tab navigation
     * Telescope
 * htop
 * Vim
@@ -66,7 +71,6 @@ bash <( curl -fsSL https://codeberg.org/knyz/vilyaemsetup/raw/branch/master/setu
     * Autocorrection
     * Helpful aliases
 * [tmux](https://en.wikipedia.org/wiki/Tmux), the multiplexer
-* Tmuxinator, the tmux automation tool
 * Readline, now with Vim key-binds 
 * mpv, the media player
     * Visualizer
@@ -78,19 +82,12 @@ bash <( curl -fsSL https://codeberg.org/knyz/vilyaemsetup/raw/branch/master/setu
 * spectrwm
 * screenkey
 ## Included Scripts and Binaries
-- audmenu - Select a song for Audacious to play with dmenu
 - bar - Status bar
-- cl - Assembly program that clears a terminal
 - killmenu - Kill a process (sorted by CPU usage) with dmenu
 - mmenu - Consume personal media like a television channel
 - qalcmenu - Do quick Qalculations in dmenu
-- rsb - Russian Synodal Bible (precompiled binary)
 - v - pager, alias, and file-opener
-- vmmenu - Complete Virtual machine management system using dmenu
-- yazi - Yazi file manager (precompiled binary)
-- zoxide - Soy database-based directory navigation tool (precompiled binary)
 - pomo - Pomodoro timer (precompiled binary)
-- pomotask - TUI menu that combines the usage of both taskwarrior and pomo
 - opusfarm - Tool for mass conversion of audio to the OPUS audio codec in parallel, but with
   preservation of metadata.
 
@@ -100,10 +97,9 @@ bash <( curl -fsSL https://codeberg.org/knyz/vilyaemsetup/raw/branch/master/setu
 I primarily use *Dvorak* as my keyboard layout. I have quite a few keybindings
 made with nhkd. I design them with these contraints:
 
-- Everything should be accessible with my left hand, given that it is closest to
-  the Windows/super key
 - There should be some sort of mnemonic with each key
 - Similar operations or alternatives can use bigger chords
+- Try to avoid extensive chords on the most comon  actions
 
 Here is a picture of a keyboard showing the hotkeys on a QWERTY and Dvorak
 layout.
@@ -112,27 +108,82 @@ layout.
 
 
 
-|Keybinding                                                   |Action                                                       |Mnemonic                                                     |
-|-------------------------------------------------------------|-------------------------------------------------------------|-------------------------------------------------------------|
-|Super+q                                                      |Open bookmark menu.                                           |(Q)uery a bookmark                                           |
-|Super+w                                                      |Open commandline Bible in main Tmux session.                 |(W)ord of God                                                |
-|Super+e                                                      |Wallpaper selection menu.                                     |Get an (e)xciting wallpaper.                                 |
-|Super+r                                                      |Open browser.                                                 |View (p)ages.                                                |
-|Super+t                                                      |Consume downloaded/personal media with mpv                   |'(T)ube.                                                     |
-|Super+a                                                      |Open Tmuxinator-based Tmux session in st.                    |(A)ctualize.                                                 |
-|Super+o                                                      |Open email client.                                           |(O)pen email. (S)end mail.                                   |
-|Super+d                                                      |Screenshot with Maim.                                        |(D)rag a screenshot.                                         |
-|Super+f                                                      |Emoji picker.                                                |Get an (e)moji.                                              |
-|Super+g                                                      |Screenshot with scrot.                                       |(G)rab the screen.                                           |
-|Super+j                                                      |Open Telegram client.                                        |I (h)ate Telegram.                                           |
-|Super+z                                                      |Use Qalculator with dmenu script.                             |(Z)ahl. (Z)eta.                                              |
-|Super+Shift+z                                                |Open Qalculator in st window.                                |(Z)ahl. (Z)eta.                                              |
-|Super+Shift+Ctrl+z                                           |Open Qalculator GUI.                                         |(Z)ahl. (Z)eta.                                              |
-|Super+x                                                      |Password picker using keepmenu.                              |(Q)uery a password. (X)OR.                                   |
-|Super+c                                                      |Play a song in Audacious with dmenu.                         |(J)ukebox.                                                   |
-|Super+v                                                      |Kill a window using killmenu.                                |(K)ill.                                                      |
-|Super+b                                                      |Open file manager in separate window.                        |Disk (b)lock. (B)lock devices.                               |
-|Super+n                                                      |Open GUI note related software such as QOwnNotes or Obsidian.|(N)ote.                                                      |
+| Keybinding          | Action                                  | Mnemonic                              |
+|---------------------|-----------------------------------------|---------------------------------------|
+| F1                  | Switch to tag 1                         |                                       |
+| F2                  | Switch to tag 2                         |                                       |
+| F3                  | Switch to tag 3                         |                                       |
+| F4                  | Switch to tag 4                         |                                       |
+| F5                  | Switch to layout 1  (stack)             |                                       |
+| F6                  | Switch to layout 2  (floating)          |                                       |
+| F7                  | Switch to layout 3  (monocle)           |                                       |
+| F8                  | Switch to layout 4  (centered master)   |                                       |
+| Super+Shift+num     | Move window to tag `num`                |                                       |
+| Super+Ctrl          | Close current window                    |                                       |
+| Super+Enter         | Open a new terminal                     |                                       |
+| Super+Grave         | Open a scratch terminal, like quake     |                                       |
+| Super+Right Alt     | Toggle bar                              |                                       |
+| Super+Space         | Program launcher                        |                                       |
+| Super+Shift+L Ctrl  | Shut down dwm                           |                                       |
+| Alt+;               | focusstack += 1                         |                                       |
+| Alt+q               | focusstack -= 1                         |                                       |
+| Alt+j               | incnmaster += 1                         |                                       |
+| Alt+k               | incnmaster -= 1                         |                                       |
+| Alt+a               | setmfact = -0.05                        |                                       |
+| Alt+o               | setmfact = +0.05                        |                                       |
+| Super+Tab           | alt-tabbing                             |                                       |
+| Alt+Tab             | view                                    |                                       |
+| Super+Shift+Space   | Toggle floating                         |                                       |
+| Super+Escape        | Toggle tags                             |                                       |
+| Super+q             | Password manager                        | (Q)uery bookmarks                     |
+| Super+w             | GIMP                                    | (W)ork on images                      |
+| Super+e             | XFCE Screenshot Tool                    | (E)xtract an image                    |
+| Super+r             | LibreOffice                             | (R)eport, (R)ecord, (R)eview          |
+| Super+t             | Invert the screen's colours             | (T)ransform                           |
+| Super+a             | Attach or create my main tmux session   | (A)ctualize                           |
+| Super+o             | Thunderbird                             | (O)utgoing mail                       |
+| Super+d             | qBittorrent                             | (D)ownload                            |
+| Super+f             | Book picker                             | (F)ind a book                         |
+| Super+g             | Newsraft RSS reader                     | (I)nternet                            |
+| Super+h             | Telegram                                | (H)ate Telegram                       |
+| Super+j             | Audacious                               | (J)ukebox                             |
+| Super+k             | Killmenu                                | (K)ill                                |
+| Super+l             | Screenlocker                            | (L)ock                                |
+| Super+z             | System monitor, htop                    | What now(?)                           |
+| Super+Shift+z       | System monitor, glances                 | What now(?)                           |
+| Super+;             | Qalc menu                               | (Z)ahl, (Z)eta                        |
+| Super+Shift+;       | Terminal Qalc                           | (Z)ahl, (Z)eta                        |
+| Super+Ctrl+Shift+;  | GUI Qalculate                           | (Z)ahl, (Z)eta                        |
+| Super+x             | Yazi file manager                       | (X)plore                              |
+| Super+Shift+x       | PCManFM                                 | (X)plore                              |
+| Super+c             | Clipmenu                                | (C)lipboard                           |
+| Super+v             | Leshy VM launcher                       | (V)irtual machine                     |
+| Super+Shift+v       | Virt-Manager                            | (V)irtual machine                     |
+| Super+b             | Obsidian                                | (B)rain                               |
+| Super+Shift+b       | Bookworm study script                   | (B)ookworm                            |
+| Super+n             | nmtui                                   | (N)etwork                             |
+| Super+m             | XFCE Settings Manager                   | (M)anage settings                     |
+| Super+s             | Syncthing                               | (S)ync                                |
+| Super+Shift+s       | KDE Connect                             | (S)ync)                               |
+| Super+Ctrl+Shift+s  | KDE Connect SMS                         | (S)ync                                |
+| Super+u             | Emoji picker                            | (U)nicode                             |
+| Super+y             | Media menu (`mmenu`)                    | (T)ube                                |
+| Super+Shift+y       | MPV from clipboard URL                  | (Y)ank URL and play                   |
+| Super+,             | KJV commandline bible                   | (W)ord of God                         |
+| Super+Shift+,       | BibleTime                               | (W)ord of God                         |
+| Super+.             | Wallpaper selector                      | (E)den                                |
+| Super+/             | Kdenlive                                |                                       |
+| Super+Shift+/       | DaVinci Resolve                         |                                       |
+| Super+Ctrl+Shift+/  | Shotcut                                 |                                       |
+| Super+[             | ALSA mixer                              |                                       |
+| Super+Shift+[       | Pavucontrol                             |                                       |
+| Super+\             | Anki                                    |                                       |
+| Super+5             | Brightness down 10%                     |                                       |
+| Super+6             | Brightness up 10%                       |                                       |
+| Super+7             | Set brightness to 1%                    |                                       |
+| Super+8             | Volume down 8%                          |                                       |
+| Super+9             | Volume up 8%                            |                                       |
+| Super+0             | Toggle mute                             | Toggle volume being (0)               |
 
 ## Neovim and CLI-only setup
 
@@ -141,7 +192,6 @@ There are two extra installation scripts available.
 
 * "cli" - Installs only the command-line environment, helpful for:
     - Setting up a SSH environment
-    - Improving the experience of Termux
     - Allowing you to use your typical desktop environment, but with this
       command-line experience.
 
@@ -155,6 +205,11 @@ bash <( curl -fsSL https://codeberg.org/knyz/vilyaemsetup/raw/branch/master/cli)
 bash <( curl -fsSL https://codeberg.org/knyz/vilyaemsetup/raw/branch/master/nvim)
 ```
 
+## Read More
+
+<https://vilyaem.xyz/wrt/File%20Organization.txt>
+
+<https://vilyaem.xyz/wrt/MySetup.txt>
 
 ## INFO
 Website: https://vilyaem.xyz

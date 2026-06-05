@@ -8,5 +8,6 @@ export XCURSOR_THEME="Bibata-Modern-Classic"
 export PATH="$HOME/.nix-profile/bin:$PATH"
 export GTK_USE_PORTAL=1
 export XDG_CURRENT_DESKTOP=KDE
-[ "$(tty)" = "/dev/tty1" ] && exec xinit
+export RLWRAP_EDITOR="vim '+call cursor(%L,%C)'"
+[ "$(tty)" = "/dev/tty1" ] && startx
 #[ "$(tty)" = "/dev/tty1" ] && exec doas slim
