@@ -3,11 +3,10 @@
 # Author - Vilyaem
 ############################################
 
-##########Zsh##########
+##;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ZSH ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;##
 source  /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source <(fzf --zsh)
-#autoload -Uz compinit -C -d "$ZSH_COMPDUMP/.zcompdump-${ZSH_VERSION}"
 autoload -U colors && colors
 _comp_options+=(globdots)
 # Enable case-insensitive completion
@@ -39,7 +38,7 @@ bindkey '^[[A' history-search-backward
 bindkey '^[[B' history-search-forward
 
 
-##########Default Programs##########
+##;;;;;;;;;;;;;;;;;;;;;;;;;;;;; DEFAULT PROGRAMS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;##
 export BROWSER="librewolf"
 export BUG_PROJECT=$(pwd)/bug
 export CC="gcc"
@@ -51,27 +50,26 @@ export TERMINAL="st"
 export SESSION_MANAGER="slim"
 export RLWRAP_EDITOR="vim '+call cursor(%L,%C)'"
 
-##########Ricing##########
+##;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; RICING ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;##
 eval $(dircolors -b)
 
-##########Cleanup##########
+
+##;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; CLEANUP ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;##
 export INPUTRC="~/.config/readline/.inputrc"
 export XINITRC="$HOME/.config/X11/xinitrc"
-#export PYTHONSTARTUP="$HOME/.config/pythonrc"
 export LESSHISTFILE="-"
 export ASPELL_CONF="per-conf $XDG_CONFIG_HOME/aspell/aspell.conf; personal $XDG_DATA_HOME/aspell/en.pws; repl $XDG_DATA_HOME/aspell/en.prepl"
 export ICEAUTHORITY="$XDG_CACHE_HOME/ICEauthority"
 export ELECTRUMDIR="$XDG_DATA_HOME/electrum"
 
-##########Wine##########
+
+##;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; WINE ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;##
 alias wine='WINEPREFIX="$HOME/.wine" WINEARCH=win32 wine'
 alias wine64='WINEPREFIX="$HOME/.local/share/wineprefixes/default/" WINEARCH=win64 wine64'
-#export WINEPREFIX=~/.wine64/
 export WINEPREFIX=~/.local/share/wineprefixes/default/
 export WINEARCH=win64
 
-
-##########Aliases##########
+##;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ALIASES ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;##
 alias abook='abook --datafile ~/.local/share/abook/addressbook'
 alias alsafix='for x in `amixer controls  | grep layback` ; do amixer cset "${x}" on ; done' 
 alias apc='doas apt list --installed | wc -l'
@@ -96,7 +94,8 @@ alias getmouse='xdotool getmouselocation --shell'
 alias ghex='grabc -hex' 
 alias gmt='xdg-mime query filetype $1' 
 alias grgb='grabc -rgb' \
-alias hosted='doas v /etc/hosts ; exit' 
+  alias hosted='doas v /etc/hosts ; exit' 
+alias lg="lazygit"
 alias ll='eza -lah --icons --git'
 alias llh='eza -lah --icons --git --header'
 alias ls='eza --icons'
@@ -129,7 +128,7 @@ alias yt='ytfzf --ii=inv.nadeko.net --show-thumbnails -T chafa --max-threads=$(n
 alias zipup='zip -r $1.zip $1 &&  rm $1'
 alias zq="zoxide query $@"
 
-##########Shell functions & utilities##########
+##;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SHELL FUNCTIONS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;##
 
 #Dictionary!
 dict(){
@@ -172,7 +171,18 @@ tw(){
 
 #Download 'tube with metadata
 tm(){
-noglob yt-dlp -x --audio-format mp3 --embed-metadata --embed-thumbnail --add-metadata $(echo "$@" | sed -e 's|inv\.nadeko\.net|youtube.com|g' -e 's|yewtu\.be|youtube.com|g')
+  noglob yt-dlp -x --audio-format mp3 --embed-metadata --embed-thumbnail --add-metadata $(echo "$@" | sed -e 's|inv\.nadeko\.net|youtube.com|g' -e 's|yewtu\.be|youtube.com|g')
+}
+
+#Download using tm and then use opusfarm to work on it
+tmopus(){
+  mkdir n
+  cd n
+  tm $@
+  opusfarm
+  mv tmpopus/* ../
+  cd ../
+  rm -rifv n/
 }
 
 #Yazi shell wrapper script
@@ -206,7 +216,7 @@ function bkupflash(){
   sudo borg compact -v "$MOUNTPOINT/" # >> "$LOG" 2>&1
 }
 
-##########Zoxide##########
+##;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ZOXIDE ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;##
 eval "$(zoxide init zsh)"
 
 export NVM_DIR="$HOME/.nvm"

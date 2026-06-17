@@ -22,7 +22,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.shiftwidth = 2
 vim.opt.spelllang = 'en_gb'
-vim.opt.swapfile = false
+-- vim.opt.swapfile = false
 vim.opt.viminfo = ''
 vim.opt.virtualedit = "all"
 
@@ -85,11 +85,11 @@ end
 
 
 -- Comment keybinding
-vim.keymap.set("i", "<leader>h/", function()
+vim.keymap.set("i", "<leader>/h", function()
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
   insert_comment_header()
   vim.api.nvim_feedkeys("i", "n", false)
-end, { noremap = true, silent = true, desc = "Insert or update comment header" })
+end, { noremap = true, silent = true, desc = "Insert comment header" })
 
 -- Section banners
 
@@ -124,7 +124,7 @@ local function insert_banner()
   vim.api.nvim_put({ line }, "l", true, true)
 end
 
-vim.keymap.set("i", "<leader>s/", insert_banner,{ desc = "Insert section banner", noremap = true})
+vim.keymap.set("i", "<leader>/s", insert_banner,{ desc = "Insert section banner", noremap = true})
 
 -- F6 talk to the soybot
 vim.api.nvim_set_keymap("n","<F6>","<Esc>:Gen<CR>",{noremap = true, silent = true})

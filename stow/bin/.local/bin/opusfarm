@@ -8,17 +8,7 @@
 ###############################################
 set -euo pipefail
 set -x
-#BR=$(read -rp "Enter desired bitrate in kbps:")
 mkdir -p tmpopus || exit 1 
-
-# read -rp "Enter bitrate (k): " bitrate
-# bitrate="$(echo "$bitrate" | xargs)"  # strip spaces
-# if ! [[ "$bitrate" =~ ^[0-9]+$ ]]; then
-#   echo "Invalid number: $bitrate"
-#   exit 1
-# fi
-# echo "Using bitrate: $bitratek"
-
 
 convert_one() {
   f="$1"
@@ -33,8 +23,8 @@ convert_one() {
   ffmpeg -y -i "$f" -an -vcodec mjpeg -frames:v 1 "$cover" 2>/dev/null || cover=""
 
   # Step 1: Encode audio to Opus
-  #ffmpeg -hide_banner -y -i "$f" -c:a libopus -ac 1 -b:a 128k -vn "$out"
-  ffmpeg -hide_banner -y -i "$f" -c:a libopus -ac 1  -vn "$out"
+  ffmpeg -hide_banner -y -i "$f" -c:a libopus -ac 1 -b:a 128k -vn "$out"
+  # ffmpeg -hide_banner -y -i "$f" -c:a libopus -ac 1  -vn "$out"
 
   # Step 2: Extract metadata
   artist="$(ffprobe -v error -show_entries format_tags=artist -of default=nw=1:nk=1 "$f" || true)"
